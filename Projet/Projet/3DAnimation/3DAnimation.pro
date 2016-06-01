@@ -27,7 +27,6 @@ HEADERS += \
     ../../Common/Shapes/Cylinder.h \
     src/RW.h \
     src/Cat.h \
-    src/parseur.h \
     src/objloader.h
 
 SOURCES += \
@@ -43,7 +42,6 @@ SOURCES += \
     src/main.cpp \
     src/RW.cpp \
     src/Cat.cpp \
-    src/parseur.cpp \
     src/objloader.cpp
 
 DISTFILES +=
