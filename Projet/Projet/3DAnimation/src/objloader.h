@@ -27,17 +27,23 @@ public:
      std::vector<vec3> m_TabVertices;
      std::vector<vec2> m_TabNormals;
      std::vector<vec3> m_TabTexCoords;
+
+     bool loadOBJ(
+             const char * path,
+              std::vector<vec3> m_TabVertices,
+              std::vector<vec2>m_TabNormals,
+              std::vector<vec3> m_TabTexCoords
+
+         );
+
+     std::vector<vec3> getTabVertices();
+     std::vector<vec2> getTabNormals();
+     std::vector<vec3> getTabTexCoords();
 };
 
 
 
-bool loadOBJ(
-    const char * path,
-     std::vector<vec3> m_TabVertices,
-     std::vector<vec2>m_TabNormals,
-     std::vector<vec3> m_TabTexCoords
 
-);
 
 
 /**bool loadAssImp(

@@ -10,10 +10,10 @@
 
 ObjLoader::ObjLoader()
 {
-    loadOBJ("testExport.obj",m_TabVertices,m_TabNormals,m_TabTexCoords);
+    loadOBJ("cat.obj",m_TabVertices,m_TabNormals,m_TabTexCoords);
 }
 
-bool loadOBJ(
+bool ObjLoader::loadOBJ(
     const char * path,
         std::vector<vec3> m_TabVertices,
         std::vector<vec2> m_TabNormals,
@@ -30,6 +30,7 @@ bool loadOBJ(
     FILE * file = fopen(path, "r");
 
     if( file == NULL ){
+        printf("%s", strerror(errno));
         printf("Impossible d'ouvrir le fichier \n");
         getchar();
         return false;
@@ -67,6 +68,8 @@ bool loadOBJ(
 
         }else if ( strcmp( lineHeader, "f" ) == 0 ){
 
+            std::vector< std::vector<unsigned int> > face;
+
             std::string vertex1, vertex2, vertex3;
             unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
             int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2] );
@@ -78,12 +81,15 @@ bool loadOBJ(
             vertexIndices.push_back(vertexIndex[0]);
             vertexIndices.push_back(vertexIndex[1]);
             vertexIndices.push_back(vertexIndex[2]);
+
             uvIndices    .push_back(uvIndex[0]);
             uvIndices    .push_back(uvIndex[1]);
             uvIndices    .push_back(uvIndex[2]);
+
             normalIndices.push_back(normalIndex[0]);
             normalIndices.push_back(normalIndex[1]);
             normalIndices.push_back(normalIndex[2]);
+
         }else{
             // Probably a comment, eat up the rest of the line
             char stupidBuffer[1000];
@@ -110,7 +116,20 @@ bool loadOBJ(
         m_TabNormals.push_back(uv);
         m_TabTexCoords.push_back(normal);
 
+
     }
 
     return true;
+}
+
+std::vector<vec3> ObjLoader::getTabVertices(){
+    return this->m_TabVertices;
+}
+
+std::vector<vec2> ObjLoader::getTabNormals(){
+    return this ->m_TabNormals;
+}
+
+std::vector<vec3> ObjLoader::getTabTexCoords(){
+    return this ->m_TabTexCoords;
 }

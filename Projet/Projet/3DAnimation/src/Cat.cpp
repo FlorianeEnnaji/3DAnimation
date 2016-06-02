@@ -69,6 +69,8 @@ Cat::drawShape( const char* shader_name )
     m_Cube.draw( shader_name );
     m_Framework->popMatrix();
 
+
+
 }
 
 
