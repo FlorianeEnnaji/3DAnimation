@@ -26,7 +26,8 @@ HEADERS += \
     ../../Common/Shapes/Cubes.h \
     ../../Common/Shapes/Cylinder.h \
     src/RW.h \
-    src/Cat.h
+    src/Cat.h \
+    src/objloader.h
 
 SOURCES += \
     ../../Common/RandomNumberGenerator.cpp \
@@ -40,5 +41,8 @@ SOURCES += \
     ../../Common/Shapes/Cylinder.cpp \
     src/main.cpp \
     src/RW.cpp \
-    src/Cat.cpp
+    src/Cat.cpp \
+    src/objloader.cpp
+
+DISTFILES +=
 
