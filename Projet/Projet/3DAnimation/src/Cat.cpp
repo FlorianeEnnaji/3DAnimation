@@ -5,7 +5,7 @@ Cat::Cat()
 {
     //Fill our tables
     ObjLoader obj;
-    GLboolean loaded = obj.loadOBJ("/Users/florianeennaji/Documents/IN55/3DAnimation/Projet/Projet/3DAnimation/model/cat.obj",m_TabVertices,m_TabTexCoords,m_TabNormals);
+    GLboolean loaded = obj.loadOBJ("../model/cat.obj",m_TabVertices,m_TabTexCoords,m_TabNormals);
 }
 
 void
