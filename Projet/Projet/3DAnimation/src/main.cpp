@@ -20,8 +20,6 @@ int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
     RW win;
-    ObjLoader ob;
-    new ObjLoader();
 	win.show();
 	return app.exec();
 }
