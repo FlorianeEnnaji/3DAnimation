@@ -7,17 +7,11 @@
 #include <iostream>
 
 
-
-ObjLoader::ObjLoader()
-{
-    loadOBJ("cat.obj",m_TabVertices,m_TabNormals,m_TabTexCoords);
-}
-
 bool ObjLoader::loadOBJ(
     const char * path,
-        std::vector<vec3> m_TabVertices,
-        std::vector<vec2> m_TabNormals,
-        std::vector<vec3> m_TabTexCoords
+        std::vector<vec3> &tabVertices,
+        std::vector<vec2> &tabNormals,
+        std::vector<vec3> &tabTexCoords
 ){
     printf("Loading OBJ file %s...\n", path);
 
@@ -30,7 +24,7 @@ bool ObjLoader::loadOBJ(
     FILE * file = fopen(path, "r");
 
     if( file == NULL ){
-        printf("%s", strerror(errno));
+        //printf("%s", strerror(errno));
         printf("Impossible d'ouvrir le fichier \n");
         getchar();
         return false;
@@ -112,9 +106,9 @@ bool ObjLoader::loadOBJ(
         vec3 normal = temp_normals[ normalIndex-1 ];
 
         // Put the attributes in buffers
-        m_TabVertices.push_back(vertex);
-        m_TabNormals.push_back(uv);
-        m_TabTexCoords.push_back(normal);
+        tabVertices.push_back(vertex);
+        tabNormals.push_back(uv);
+        tabTexCoords.push_back(normal);
 
 
     }
@@ -122,14 +116,3 @@ bool ObjLoader::loadOBJ(
     return true;
 }
 
-std::vector<vec3> ObjLoader::getTabVertices(){
-    return this->m_TabVertices;
-}
-
-std::vector<vec2> ObjLoader::getTabNormals(){
-    return this ->m_TabNormals;
-}
-
-std::vector<vec3> ObjLoader::getTabTexCoords(){
-    return this ->m_TabTexCoords;
-}

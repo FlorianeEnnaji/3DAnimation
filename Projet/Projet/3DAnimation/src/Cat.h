@@ -3,7 +3,7 @@
 
 
 #include "Object3D.h"
-#include "Shapes/Cubes.h"
+#include "objloader.h"
 
 class Cat : public Object3D
 {
@@ -17,13 +17,9 @@ protected:
     void anim();
 
 protected:
-    TwoColorCube m_Cube;
-    MultipleColorCube m_Body;
-
-    GLfloat m_PawFrontLeftAngle;
-    GLfloat m_PawFrontRightAngle;
-    GLfloat m_PawBackLeftAngle;
-    GLfloat m_PawBackRightAngle;
+    std::vector< vec3 > m_TabVertices;
+    std::vector< vec2 > m_TabTexCoords;
+    std::vector< vec3 > m_TabNormals;
 
 };
 

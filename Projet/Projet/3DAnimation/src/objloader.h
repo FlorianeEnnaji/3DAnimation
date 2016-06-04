@@ -23,35 +23,14 @@ float y;
 class ObjLoader
 {
 public:
-    ObjLoader();
-     std::vector<vec3> m_TabVertices;
-     std::vector<vec2> m_TabNormals;
-     std::vector<vec3> m_TabTexCoords;
 
      bool loadOBJ(
              const char * path,
-              std::vector<vec3> m_TabVertices,
-              std::vector<vec2>m_TabNormals,
-              std::vector<vec3> m_TabTexCoords
+              std::vector<vec3> & m_TabVertices,
+              std::vector<vec2> & m_TabNormals,
+              std::vector<vec3> & m_TabTexCoords
 
          );
-
-     std::vector<vec3> getTabVertices();
-     std::vector<vec2> getTabNormals();
-     std::vector<vec3> getTabTexCoords();
 };
-
-
-
-
-
-
-/**bool loadAssImp(
-    const char * path,
-    std::vector<unsigned short> & indices,
-    GLfloat* vertices,
-    GLfloat* normals,
-    GLfloat* texCoords
-);*/
 
 #endif // OBJLOADER_H
