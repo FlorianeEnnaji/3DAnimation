@@ -23,8 +23,8 @@ HEADERS += \
     ../../Common/RandomNumberGenerator.h \
     ../../Common/Shapes/Shape.h \
     ../../Common/Shapes/ParametricShape.h \
-    ../../Common/Shapes/Cubes.h \
-    ../../Common/Shapes/Cylinder.h \
+    ../../Common/Camera.h \
+    ../../Common/Quaternion.h \
     src/RW.h \
     src/Cat.h \
     src/objloader.h
@@ -37,8 +37,8 @@ SOURCES += \
     ../../Common/Object3D.cpp \
     ../../Common/Shapes/Shape.cpp \
     ../../Common/Shapes/ParametricShape.cpp \
-    ../../Common/Shapes/Cubes.cpp \
-    ../../Common/Shapes/Cylinder.cpp \
+    ../../Common/Camera.cpp \
+    ../../Common/Quaternion.cpp \
     src/main.cpp \
     src/RW.cpp \
     src/Cat.cpp \
