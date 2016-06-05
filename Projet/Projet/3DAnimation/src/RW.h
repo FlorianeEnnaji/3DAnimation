@@ -2,11 +2,19 @@
 #define RW_h
 
 
-#include "GlWindow.h"
+#include "../../Common/GlWindow.h"
+#include "../../Common/Types.h"
+#include "../../Common/Camera.h"
 
 
 class RW : public GlWindow
 {
+    private:
+    Camera* m_Camera;
+    Vec2 m_mousePosition;
+    float m_currentRotationX;
+    float m_currentRotationY;
+
 	public:
         RW();
         ~RW();
@@ -22,6 +30,7 @@ class RW : public GlWindow
 		void render();
 
 		void keyPressEvent(QKeyEvent *);
+        void mouseMoveEvent(QMouseEvent *);
 };
 
 

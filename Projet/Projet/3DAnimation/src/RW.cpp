@@ -15,14 +15,23 @@ Cat* cat;
 
 RW::RW()
 {
+    m_currentRotationX = 0.0;
+    m_currentRotationY = 0.0;
     setWindowTitle(trUtf8("3DAnimation"));
     cat = new Cat();
+
+    Vec3 *cameraPosition = new Vec3(0,10,40);
+    m_mousePosition.x = 0;
+    m_mousePosition.y = 5;
+    Vec3 *cameraOrientation = new Vec3(0,5,0);
+    m_Camera = new Camera(*cameraPosition, *cameraOrientation, 70, 40, 5, 0.7);
 }
 
 
 RW::~RW()
 {
     delete cat;
+    delete m_Camera;
 }
 
 
@@ -53,49 +62,94 @@ RW::initializeObjects()
 void
 RW::render()
 {
-	// Initialisation de la caméra
-    lookAt( 0, 5, 30, 0, 0, 0 );
+
+    Quaternion orientation = m_Camera->getOrientation();
+    lookAt( m_Camera->getPosition().x , m_Camera->getPosition().y, m_Camera->getPosition().z
+                ,orientation.getVec().x, orientation.getVec().y, orientation.getVec().z);
 
 
-	// Rendu des objets
+    m_Camera->buildViewMatrix();
+    m_Camera->buildProjectionMatrix();
+
+    // Rendu des objets
 	pushMatrix();
-		rotate( angle1, 0, 1, 0 );
-		rotate( angle2, 1, 0, 0 );
-
-        translate( 0, 5, 0 );
-
-        cat->draw();
+    cat->draw();
     popMatrix();
 }
+
 
 
 void
 RW::keyPressEvent( QKeyEvent* event )
 {
-	switch( event->key())
-	{
-		case Qt::Key_Escape:
-			close();
-			break;
+    switch( event->key())
+    {
+    case Qt::Key_Escape:
+        close();
+        break;
 
-		case Qt::Key_Left:
-			angle1 -= g_AngleSpeed;
-			break;
+    case Qt::Key_Left:
+        m_Camera->translateX(-1);
+        break;
 
-		case Qt::Key_Right:
-			angle1 += g_AngleSpeed;
-			break;
+    case Qt::Key_Right:
+        m_Camera->translateX(1);
+        break;
 
-		case Qt::Key_Up:
-			angle2 -= g_AngleSpeed;
-			break;
+    case Qt::Key_Up:
+        m_Camera->translateY(1);
+        break;
 
-		case Qt::Key_Down:
-			angle2 += g_AngleSpeed;
-			break;
+    case Qt::Key_Down:
+        m_Camera->translateY(-1);
+        break;
 
-		case Qt::Key_R:
-			angle1 = angle2 = 0.0f;
-			break;
-	}
+    case Qt::Key_Plus:
+        m_Camera->translateZ(-1);
+        break;
+
+    case Qt::Key_Minus:
+        m_Camera->translateZ(1);
+        break;
+    }
+}
+
+void
+RW::mouseMoveEvent(QMouseEvent * event)
+{
+    this->setMouseTracking(true);
+    float mouseSensitivity = 10.0;
+
+      // the middle of the screen in the x direction
+      int middleX = 1024/2;
+      // the middle of the screen in the y direction
+      int middleY = 768/2;
+
+      // This function gets the position of the mouse
+      Vec2 mousePosition = Vec2(event->pos().x(), event->pos().y());
+
+      // if the mouse hasn't moved, return
+      if((mousePosition.x == middleX) && (mousePosition.y == middleY))
+        return;
+
+      // otherwise move the mouse back to the middle of the screen
+      int xDiff = mousePosition.x - middleX;
+      int yDiff = mousePosition.y - middleY;
+
+      m_currentRotationY = xDiff;
+      m_currentRotationX = -yDiff;
+
+      middleY = middleY - 175;
+      middleX = middleX - 250;
+      // We don't want to rotate more than the width of the window, so we cap it.
+      if(!(xDiff > middleX) && !(xDiff < -middleX)) {
+          m_Camera->setOrientation((xDiff)/mouseSensitivity,m_Camera->getOrientation().y,m_Camera->getOrientation().z);
+        //m_Camera->rotateX((-yDiff)*100/MouseSensitivity);
+      }
+
+      // We don't want to rotate more than the height of the window, so we cap it.
+      if (!(yDiff > middleY) && !(yDiff < -middleY)) {
+          m_Camera->setOrientation(m_Camera->getOrientation().x,(-yDiff)/mouseSensitivity,m_Camera->getOrientation().z);
+        //m_Camera->rotateY((-xDiff)*100/MouseSensitivity);
+      }
 }
