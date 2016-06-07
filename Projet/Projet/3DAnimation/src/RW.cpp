@@ -20,7 +20,7 @@ RW::RW()
     setWindowTitle(trUtf8("3DAnimation"));
     cat = new Cat();
 
-    Vec3 *cameraPosition = new Vec3(0,10,40);
+    Vec3 *cameraPosition = new Vec3(20,10,30);
     m_mousePosition.x = 0;
     m_mousePosition.y = 5;
     Vec3 *cameraOrientation = new Vec3(0,5,0);
@@ -62,7 +62,6 @@ RW::initializeObjects()
 void
 RW::render()
 {
-
     Quaternion orientation = m_Camera->getOrientation();
     lookAt( m_Camera->getPosition().x , m_Camera->getPosition().y, m_Camera->getPosition().z
                 ,orientation.getVec().x, orientation.getVec().y, orientation.getVec().z);
@@ -110,6 +109,18 @@ RW::keyPressEvent( QKeyEvent* event )
 
     case Qt::Key_Minus:
         m_Camera->translateZ(1);
+        break;
+
+    case Qt::Key_W:
+        cat->walk();
+        break;
+
+    case Qt::Key_R:
+        cat->run();
+        break;
+
+    case Qt::Key_J:
+        cat->jump();
         break;
     }
 }
