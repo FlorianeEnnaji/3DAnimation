@@ -14,10 +14,10 @@ RW::RW()
     setWindowTitle(trUtf8("3DAnimation"));
     g_Cat = new Cat();
 
-    Vec3 *camera_position = new Vec3(20,10,30);
+    Vec3* camera_position = new Vec3(20,10,30);
     m_MousePosition.x = 0;
     m_MousePosition.y = 5;
-    Vec3 *camera_orientation = new Vec3(0,5,0);
+    Vec3* camera_orientation = new Vec3(0,5,0);
     m_Camera = new Camera(*camera_position, *camera_orientation, 70, 40, 5, 0.7);
 }
 
@@ -75,47 +75,47 @@ RW::render()
 void
 RW::keyPressEvent( QKeyEvent* event )
 {
-    switch( event->key())
+    switch (event->key())
     {
-    case Qt::Key_Escape:
-        close();
-        break;
+        case Qt::Key_Escape:
+            close();
+            break;
 
-    case Qt::Key_Left:
-        m_Camera->translateX(-1);
-        break;
+        case Qt::Key_Left:
+            m_Camera->translateX(-1);
+            break;
 
-    case Qt::Key_Right:
-        m_Camera->translateX(1);
-        break;
+        case Qt::Key_Right:
+            m_Camera->translateX(1);
+            break;
 
-    case Qt::Key_Up:
-        m_Camera->translateY(1);
-        break;
+        case Qt::Key_Up:
+            m_Camera->translateY(1);
+            break;
 
-    case Qt::Key_Down:
-        m_Camera->translateY(-1);
-        break;
+        case Qt::Key_Down:
+            m_Camera->translateY(-1);
+            break;
 
-    case Qt::Key_Plus:
-        m_Camera->translateZ(-1);
-        break;
+        case Qt::Key_Plus:
+            m_Camera->translateZ(-1);
+            break;
 
-    case Qt::Key_Minus:
-        m_Camera->translateZ(1);
-        break;
+        case Qt::Key_Minus:
+            m_Camera->translateZ(1);
+            break;
 
-    case Qt::Key_W:
-        g_Cat->walk();
-        break;
+        case Qt::Key_W:
+            g_Cat->walk();
+            break;
 
-    case Qt::Key_R:
-        g_Cat->run();
-        break;
+        case Qt::Key_R:
+            g_Cat->run();
+            break;
 
-    case Qt::Key_J:
-        g_Cat->jump();
-        break;
+        case Qt::Key_J:
+            g_Cat->jump();
+            break;
     }
 }
 
@@ -125,36 +125,41 @@ RW::mouseMoveEvent(QMouseEvent * event)
     this->setMouseTracking(true);
     float mouseSensitivity = 10.0;
 
-      // the middle of the screen in the x direction
-      int middle_x = 1024/2;
-      // the middle of the screen in the y direction
-      int middle_y = 768/2;
+    // the middle of the screen in the x direction
+    int middle_x = 1024/2;
+    // the middle of the screen in the y direction
+    int middle_y = 768/2;
 
-      // This function gets the position of the mouse
-      Vec2 mouse_position = Vec2(event->pos().x(), event->pos().y());
+    // This function gets the position of the mouse
+    Vec2 mouse_position = Vec2(event->pos().x(), event->pos().y());
 
-      // if the mouse hasn't moved, return
-      if((mouse_position.x == middle_x) && (mouse_position.y == middle_y))
+    // if the mouse hasn't moved, return
+    if ((mouse_position.x == middle_x) && (mouse_position.y == middle_y))
+    {
         return;
+    }
 
-      // otherwise move the mouse back to the middle of the screen
-      int x_diff = mouse_position.x - middle_x;
-      int y_diff = mouse_position.y - middle_y;
+    // otherwise move the mouse back to the middle of the screen
+    int x_diff = mouse_position.x - middle_x;
+    int y_diff = mouse_position.y - middle_y;
 
-      m_CurrentRotationY = x_diff;
-      m_CurrentRotationX = -y_diff;
+    m_CurrentRotationY = x_diff;
+    m_CurrentRotationX = -y_diff;
 
-      middle_y = middle_y - 175;
-      middle_x = middle_x - 250;
-      // We don't want to rotate more than the width of the window, so we cap it.
-      if(!(x_diff > middle_x) && !(x_diff < -middle_x)) {
-          m_Camera->setOrientation((x_diff)/mouseSensitivity,m_Camera->getOrientation().m_Y,m_Camera->getOrientation().m_Z);
+    middle_y = middle_y - 175;
+    middle_x = middle_x - 250;
+
+    // We don't want to rotate more than the width of the window, so we cap it.
+    if (!(x_diff > middle_x) && !(x_diff < -middle_x))
+    {
+        m_Camera->setOrientation((x_diff)/mouseSensitivity,m_Camera->getOrientation().m_Y,m_Camera->getOrientation().m_Z);
         //m_Camera->rotateX((-yDiff)*100/MouseSensitivity);
-      }
+    }
 
-      // We don't want to rotate more than the height of the window, so we cap it.
-      if (!(y_diff > middle_y) && !(y_diff < -middle_y)) {
-          m_Camera->setOrientation(m_Camera->getOrientation().m_X,(-y_diff)/mouseSensitivity,m_Camera->getOrientation().m_Z);
+    // We don't want to rotate more than the height of the window, so we cap it.
+    if (!(y_diff > middle_y) && !(y_diff < -middle_y))
+    {
+        m_Camera->setOrientation(m_Camera->getOrientation().m_X,(-y_diff)/mouseSensitivity,m_Camera->getOrientation().m_Z);
         //m_Camera->rotateY((-xDiff)*100/MouseSensitivity);
-      }
+    }
 }

@@ -6,6 +6,7 @@ int g_Step = 0;
 Cat::Cat()
 {
     m_Obj = new ObjLoader();
+
     //Fill our tables
     GLboolean loaded1 = m_Obj->loadObj("../model/cat.obj",m_TabVerticesOriginal,m_TabTexCoordsOriginal,m_TabNormalsOriginal);
 
@@ -78,7 +79,8 @@ Cat::drawShape( const char* shader_name )
     glDisableVertexAttribArray(color);
     m_Framework->popMatrix();
 
-    switch(m_AnimType) {
+    switch (m_AnimType)
+    {
         case 0:
             anim();
             break;
@@ -99,7 +101,8 @@ Cat::drawShape( const char* shader_name )
 void
 Cat::setTabVertices(std::vector< vec3 > origin, std::vector< vec3 > destination, int interval)
 {
-    for (int i = 0; i < m_TabVertices.size(); i++) {
+    for (int i = 0; i < m_TabVertices.size(); i++)
+    {
         m_TabVertices[i].x += (destination[i].x - origin[i].x) / interval;
         m_TabVertices[i].y += (destination[i].y - origin[i].y) / interval;
         m_TabVertices[i].z += (destination[i].z - origin[i].z) / interval;
@@ -109,76 +112,99 @@ Cat::setTabVertices(std::vector< vec3 > origin, std::vector< vec3 > destination,
 void
 Cat::anim()
 {
-    if (g_Step == 40) {
+    if (g_Step == 40)
+    {
         m_TabVertices = m_TabVerticesOriginal;
         return;
     }
+
     //We finish another anim
     this->setTabVertices(m_TabVertices, m_TabVerticesOriginal, 40);
     g_Step++;
-
 }
 
 void
 Cat::walkAnim()
 {
-    if (m_StepOfAnim == 0) {
+    if (m_StepOfAnim == 0)
+    {
         //We start to walk
-        if (g_Step == 25) {
+        if (g_Step == 25)
+        {
             g_Step = 0;
             m_StepOfAnim = 1;
-        } else {
+        }
+        else
+        {
             this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesWalk1, 25);
             g_Step++;
             return;
         }
     }
     if (g_Step == 50) {
-        if (m_StepOfAnim == 1) {
+        if (m_StepOfAnim == 1)
+        {
             m_StepOfAnim = 2;
-        } else {
+        }
+        else
+        {
             m_StepOfAnim = 1;
         }
         g_Step = 0;
     }
-    if (m_StepOfAnim == 1) {
+    if (m_StepOfAnim == 1)
+    {
         this->setTabVertices(m_TabVerticesWalk1, m_TabVerticesWalk2, 50);
-    } else {
+    }
+    else
+    {
         this->setTabVertices(m_TabVerticesWalk2, m_TabVerticesWalk1, 50);
     }
 
     g_Step++;
-
 }
 
 void
 Cat::runAnim()
 {
-    if (m_StepOfAnim == 0) {
+    if (m_StepOfAnim == 0)
+    {
         //We start to run
-        if (g_Step == 12) {
+        if (g_Step == 12)
+        {
             g_Step = 0;
             m_StepOfAnim = 1;
-        } else {
+        }
+        else
+        {
             this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesRun1, 12);
             g_Step++;
             return;
         }
     }
-    if (g_Step == 25) {
+    if (g_Step == 25)
+    {
         m_StepOfAnim++;
-        if (m_StepOfAnim == 5) {
+        if (m_StepOfAnim == 5)
+        {
             m_StepOfAnim = 1;
         }
         g_Step = 0;
     }
-    if (m_StepOfAnim == 1) {
+    if (m_StepOfAnim == 1)
+    {
         this->setTabVertices(m_TabVerticesRun1, m_TabVerticesRun2, 25);
-    } else if (m_StepOfAnim == 2) {
+    }
+    else if (m_StepOfAnim == 2)
+    {
         this->setTabVertices(m_TabVerticesRun2, m_TabVerticesRun3, 25);
-    } else if (m_StepOfAnim == 3) {
+    }
+    else if (m_StepOfAnim == 3)
+    {
         this->setTabVertices(m_TabVerticesRun3, m_TabVerticesRun4, 25);
-    } else {
+    }
+    else
+    {
         this->setTabVertices(m_TabVerticesRun4, m_TabVerticesRun1, 25);
     }
 
@@ -188,37 +214,56 @@ Cat::runAnim()
 void
 Cat::jumpAnim()
 {
-    if (m_StepOfAnim == 0) {
+    if (m_StepOfAnim == 0)
+    {
         //We start to walk
-        if (g_Step == 12) {
+        if (g_Step == 12)
+        {
             g_Step = 0;
             m_StepOfAnim = 1;
-        } else {
+        }
+        else
+        {
             this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesJump1, 12);
             g_Step++;
             return;
         }
     }
-    if (g_Step == 25) {
+    if (g_Step == 25)
+    {
         m_StepOfAnim++;
-        if (m_StepOfAnim == 8) {
+        if (m_StepOfAnim == 8)
+        {
             m_StepOfAnim = 1;
         }
         g_Step = 0;
     }
-    if (m_StepOfAnim == 1) {
+    if (m_StepOfAnim == 1)
+    {
         this->setTabVertices(m_TabVerticesJump1, m_TabVerticesJump2, 25);
-    } else if (m_StepOfAnim == 2) {
+    }
+    else if (m_StepOfAnim == 2)
+    {
         this->setTabVertices(m_TabVerticesJump2, m_TabVerticesJump3, 25);
-    } else if (m_StepOfAnim == 3) {
+    }
+    else if (m_StepOfAnim == 3)
+    {
         this->setTabVertices(m_TabVerticesJump3, m_TabVerticesJump4, 25);
-    } else if (m_StepOfAnim == 4) {
+    }
+    else if (m_StepOfAnim == 4)
+    {
         this->setTabVertices(m_TabVerticesJump4, m_TabVerticesJump5, 25);
-    } else if (m_StepOfAnim == 5) {
+    }
+    else if (m_StepOfAnim == 5)
+    {
         this->setTabVertices(m_TabVerticesJump5, m_TabVerticesJump6, 25);
-    } else if (m_StepOfAnim == 6) {
+    }
+    else if (m_StepOfAnim == 6)
+    {
         this->setTabVertices(m_TabVerticesJump6, m_TabVerticesJump7, 25);
-    } else {
+    }
+    else
+    {
         this->setTabVertices(m_TabVerticesJump7, m_TabVerticesJump1, 25);
     }
 
@@ -228,22 +273,27 @@ Cat::jumpAnim()
 void
 Cat::walk()
 {
-    if (this->m_AnimType == 1) {
+    if (this->m_AnimType == 1)
+    {
         this->m_AnimType = 0;
-    } else {
+    }
+    else
+    {
         this->m_AnimType = 1;
     }
     this->m_StepOfAnim = 0;
     g_Step = 0;
-
 }
 
 void
 Cat::run()
 {
-    if (this->m_AnimType == 2) {
+    if (this->m_AnimType == 2)
+    {
         this->m_AnimType = 0;
-    } else {
+    }
+    else
+    {
         this->m_AnimType = 2;
     }
     this->m_StepOfAnim = 0;
@@ -253,9 +303,12 @@ Cat::run()
 void
 Cat::jump()
 {
-    if (this->m_AnimType == 3) {
+    if (this->m_AnimType == 3)
+    {
         this->m_AnimType = 0;
-    } else {
+    }
+    else
+    {
         this->m_AnimType = 3;
     }
     this->m_StepOfAnim = 0;

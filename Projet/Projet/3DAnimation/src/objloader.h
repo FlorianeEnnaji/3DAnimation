@@ -10,28 +10,27 @@
 #include <Vectors.h>
 #include <iostream>
 
-struct vec3{
-float x;
-float y;
-float z;
+struct vec2
+{
+    float x;
+    float y;
 };
 
-struct vec2{
-float x;
-float y;
+struct vec3
+{
+    float x;
+    float y;
+    float z;
 };
 
 class ObjLoader
 {
-public:
+    public:
 
-     bool loadObj(
-             const char * path,
-              std::vector<vec3> & m_TabVertices,
-              std::vector<vec2> & m_TabNormals,
-              std::vector<vec3> & m_TabTexCoords
-
-         );
+         bool loadObj(const char* path,
+                      std::vector<vec3>& m_TabVertices,
+                      std::vector<vec2>& m_TabNormals,
+                      std::vector<vec3>& m_TabTexCoords);
 };
 
 #endif // OBJLOADER_H

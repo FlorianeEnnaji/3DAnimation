@@ -2,12 +2,13 @@
 #include <iostream>
 
 
-Camera::Camera() {
+Camera::Camera()
+{
 
 }
 
-Camera::Camera(Vec3 pos, Vec3 ori, float angle, float fp, float np, float ratio){
-
+Camera::Camera(Vec3 pos, Vec3 ori, float angle, float fp, float np, float ratio)
+{
     this->m_FarPlan = fp;
     this->m_NearPlan = np;
     this->m_Ratio = ratio;
@@ -21,28 +22,33 @@ Camera::Camera(Vec3 pos, Vec3 ori, float angle, float fp, float np, float ratio)
     buildViewMatrix();
 }
 
-void Camera::translate(float x, float y, float z) {
+void Camera::translate(float x, float y, float z)
+{
     translateX(x);
     translateY(y);
     translateZ(z);
 }
 
-void Camera::translateX(float shift) {
+void Camera::translateX(float shift)
+{
     this->m_Position.x += shift;
     this->m_Orientation.m_X += shift;
 }
 
-void Camera::translateY(float shift) {
+void Camera::translateY(float shift)
+{
     this->m_Position.y += shift;
     this->m_Orientation.m_Y += shift;
 }
 
-void Camera::translateZ(float shift) {
+void Camera::translateZ(float shift)
+{
     this->m_Position.z += shift;
     this->m_Orientation.m_Z += shift;
 }
 
-void Camera::rotate(float angle, float ax, float ay, float az) {
+void Camera::rotate(float angle, float ax, float ay, float az)
+{
     angle = (M_PI * m_Fov / 180.0f);
     Quaternion quat;
     quat.setFromAxis(angle, ax, ay, az);
@@ -52,42 +58,49 @@ void Camera::rotate(float angle, float ax, float ay, float az) {
     m_Orientation.normalize();
 }
 
-void Camera::rotateX(float angle) {
+void Camera::rotateX(float angle)
+{
     this->rotate(angle,1,0,0);
-
 }
 
-void Camera::rotateY(float angle) {
+void Camera::rotateY(float angle)
+{
     this->rotate(angle,0,1,0);
 }
 
-void Camera::rotateZ(float angle) {
+void Camera::rotateZ(float angle)
+{
     this->rotate(angle,0,0,1);
 }
 
-const GLMatrix& Camera::getViewMatrix() {
+const GLMatrix& Camera::getViewMatrix()
+{
     return this->m_ViewMatrix;
 }
 
-void Camera::setAspectRatio(float ar) {
+void Camera::setAspectRatio(float ar)
+{
     this->m_Ratio = ar;
 }
 
-void Camera::setPlanes(float np, float fp) {
+void Camera::setPlanes(float np, float fp)
+{
     this->m_NearPlan = np;
     this->m_FarPlan = fp;
 }
 
-void Camera::setFOV(float angle) {
+void Camera::setFOV(float angle)
+{
     this->m_Fov = angle;
 }
 
-const GLMatrix& Camera::getProjectionMatrix() {
+const GLMatrix& Camera::getProjectionMatrix()
+{
     return this->m_ProjectionMatrix;
 }
 
-void Camera::buildViewMatrix() {
-
+void Camera::buildViewMatrix()
+{
     this->m_ViewMatrix.m[0][0] = 1; this->m_ViewMatrix.m[0][1] = 0; this->m_ViewMatrix.m[0][2] = 0; this->m_ViewMatrix.m[0][3] = -m_Position.x;
     this->m_ViewMatrix.m[1][0] = 0; this->m_ViewMatrix.m[1][1] = 1; this->m_ViewMatrix.m[1][2] = 0; this->m_ViewMatrix.m[1][3] = -m_Position.y;
     this->m_ViewMatrix.m[2][0] = 0; this->m_ViewMatrix.m[2][1] = 0; this->m_ViewMatrix.m[2][2] = 1; this->m_ViewMatrix.m[2][3] = -m_Position.z;
@@ -97,8 +110,8 @@ void Camera::buildViewMatrix() {
     this->m_ViewMatrix = (this->m_Orientation).getRotationMatrix() * this->m_ViewMatrix;
 }
 
-void Camera::buildProjectionMatrix() {
-
+void Camera::buildProjectionMatrix()
+{
     float alpha = 0.5f * (M_PI * m_Fov / 180.0f);
     float right = tan(alpha) * m_Ratio * m_NearPlan;
     float left = -right;
@@ -124,21 +137,21 @@ void Camera::buildProjectionMatrix() {
     this->m_ProjectionMatrix.m[3][1] = 0;
     this->m_ProjectionMatrix.m[3][2] = -1;
     this->m_ProjectionMatrix.m[3][3] = 0;
-
 }
 
-Vec3 Camera::getPosition(){
+Vec3 Camera::getPosition()
+{
     return this->m_Position;
 }
 
-Quaternion Camera::getOrientation(){
+Quaternion Camera::getOrientation()
+{
     return this->m_Orientation;
 }
 
-void Camera::setOrientation(float x, float y, float z){
-
+void Camera::setOrientation(float x, float y, float z)
+{
     // update camera's orientation
-
     m_Orientation.m_X = x;
     m_Orientation.m_Y = y;
     m_Orientation.m_Z = z;
