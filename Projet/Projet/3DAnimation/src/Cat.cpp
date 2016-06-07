@@ -3,6 +3,10 @@
 
 int g_Step = 0;
 
+/////////////////////////////// PUBLIC ///////////////////////////////////////
+
+//============================= LIFECYCLE ====================================
+
 Cat::Cat()
 {
     m_Obj = new ObjLoader();
@@ -33,8 +37,54 @@ Cat::Cat()
     m_StepOfAnim = 0;
 }
 
-void
-Cat::drawShape( const char* shader_name )
+//============================= OPERATIONS ===================================
+void Cat::walk()
+{
+    if (this->m_AnimType == 1)
+    {
+        this->m_AnimType = 0;
+    }
+    else
+    {
+        this->m_AnimType = 1;
+    }
+    this->m_StepOfAnim = 0;
+    g_Step = 0;
+}
+
+void Cat::run()
+{
+    if (this->m_AnimType == 2)
+    {
+        this->m_AnimType = 0;
+    }
+    else
+    {
+        this->m_AnimType = 2;
+    }
+    this->m_StepOfAnim = 0;
+    g_Step = 0;
+}
+
+void Cat::jump()
+{
+    if (this->m_AnimType == 3)
+    {
+        this->m_AnimType = 0;
+    }
+    else
+    {
+        this->m_AnimType = 3;
+    }
+    this->m_StepOfAnim = 0;
+    g_Step = 0;
+}
+
+/////////////////////////////// PROTECTED ///////////////////////////////////
+
+//============================= OPERATIONS ===================================
+
+void Cat::drawShape( const char* shader_name )
 {
     m_Framework->pushMatrix();
     GLuint vertex_buffer;
@@ -98,19 +148,7 @@ Cat::drawShape( const char* shader_name )
     }
 }
 
-void
-Cat::setTabVertices(std::vector< vec3 > origin, std::vector< vec3 > destination, int interval)
-{
-    for (int i = 0; i < m_TabVertices.size(); i++)
-    {
-        m_TabVertices[i].x += (destination[i].x - origin[i].x) / interval;
-        m_TabVertices[i].y += (destination[i].y - origin[i].y) / interval;
-        m_TabVertices[i].z += (destination[i].z - origin[i].z) / interval;
-    }
-}
-
-void
-Cat::anim()
+void Cat::anim()
 {
     if (g_Step == 40)
     {
@@ -123,8 +161,7 @@ Cat::anim()
     g_Step++;
 }
 
-void
-Cat::walkAnim()
+void Cat::walkAnim()
 {
     if (m_StepOfAnim == 0)
     {
@@ -164,8 +201,7 @@ Cat::walkAnim()
     g_Step++;
 }
 
-void
-Cat::runAnim()
+void Cat::runAnim()
 {
     if (m_StepOfAnim == 0)
     {
@@ -211,8 +247,7 @@ Cat::runAnim()
     g_Step++;
 }
 
-void
-Cat::jumpAnim()
+void Cat::jumpAnim()
 {
     if (m_StepOfAnim == 0)
     {
@@ -270,47 +305,14 @@ Cat::jumpAnim()
     g_Step++;
 }
 
-void
-Cat::walk()
-{
-    if (this->m_AnimType == 1)
-    {
-        this->m_AnimType = 0;
-    }
-    else
-    {
-        this->m_AnimType = 1;
-    }
-    this->m_StepOfAnim = 0;
-    g_Step = 0;
-}
+//============================= ATTRIBUTE ACCESSORS ==========================
 
-void
-Cat::run()
+void Cat::setTabVertices(std::vector< vec3 > origin, std::vector< vec3 > destination, int interval)
 {
-    if (this->m_AnimType == 2)
+    for (int i = 0; i < m_TabVertices.size(); i++)
     {
-        this->m_AnimType = 0;
+        m_TabVertices[i].x += (destination[i].x - origin[i].x) / interval;
+        m_TabVertices[i].y += (destination[i].y - origin[i].y) / interval;
+        m_TabVertices[i].z += (destination[i].z - origin[i].z) / interval;
     }
-    else
-    {
-        this->m_AnimType = 2;
-    }
-    this->m_StepOfAnim = 0;
-    g_Step = 0;
-}
-
-void
-Cat::jump()
-{
-    if (this->m_AnimType == 3)
-    {
-        this->m_AnimType = 0;
-    }
-    else
-    {
-        this->m_AnimType = 3;
-    }
-    this->m_StepOfAnim = 0;
-    g_Step = 0;
 }

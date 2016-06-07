@@ -6,6 +6,16 @@
 #include <cstring>
 #include <iostream>
 
+/////////////////////////////// PUBLIC ///////////////////////////////////////
+
+//============================= LIFECYCLE ====================================
+
+ObjLoader::ObjLoader()
+{
+
+}
+
+//============================= OPERATIONS ===================================
 
 bool ObjLoader::loadObj(const char* path, std::vector<vec3>& tabVertices,
                         std::vector<vec2>& tabNormals, std::vector<vec3>& tabTexCoords)

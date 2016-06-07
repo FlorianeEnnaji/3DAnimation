@@ -7,6 +7,10 @@ using namespace std;
 
 Cat* g_Cat;
 
+/////////////////////////////// PUBLIC ///////////////////////////////////////
+
+//============================= LIFECYCLE ====================================
+
 RW::RW()
 {
     m_CurrentRotationX = 0.0;
@@ -21,16 +25,15 @@ RW::RW()
     m_Camera = new Camera(*camera_position, *camera_orientation, 70, 40, 5, 0.7);
 }
 
-
 RW::~RW()
 {
     delete g_Cat;
     delete m_Camera;
 }
 
+//============================= OPERATIONS ===================================
 
-bool
-RW::initializeObjects()
+bool RW::initializeObjects()
 {
 	// Fond gris
 	glClearColor( 0.2f, 0.2f, 0.2f, 1.0f );
@@ -52,9 +55,7 @@ RW::initializeObjects()
 	return true;
 }
 
-
-void
-RW::render()
+void RW::render()
 {
     Quaternion orientation = m_Camera->getOrientation();
     lookAt( m_Camera->getPosition().x , m_Camera->getPosition().y, m_Camera->getPosition().z,
@@ -70,10 +71,7 @@ RW::render()
     popMatrix();
 }
 
-
-
-void
-RW::keyPressEvent( QKeyEvent* event )
+void RW::keyPressEvent( QKeyEvent* event )
 {
     switch (event->key())
     {
@@ -119,8 +117,7 @@ RW::keyPressEvent( QKeyEvent* event )
     }
 }
 
-void
-RW::mouseMoveEvent(QMouseEvent * event)
+void RW::mouseMoveEvent(QMouseEvent * event)
 {
     this->setMouseTracking(true);
     float mouseSensitivity = 10.0;

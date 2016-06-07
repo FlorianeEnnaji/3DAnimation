@@ -27,7 +27,26 @@ class ObjLoader
 {
     public:
 
-         bool loadObj(const char* path,
+        //============================= LIFECYCLE ====================================
+        /**************************************************************************
+        * Name: ObjLoader
+        * Description: the default constructor
+        **************************************************************************/
+        ObjLoader();
+
+        //============================= OPERATIONS ===================================
+        /**************************************************************************
+        * Name: loadObj
+        * Description: load a .obj file and parse it
+        * Inputs:
+            - path: the path of the .obj file
+            - m_TabVertices: the table of vertices
+            - m_TabNormals: the table of normals
+            - m_TabTexCoords: the table of texture coordinates
+        * Returns:
+            - value: description of the returned value
+        **************************************************************************/
+        bool loadObj(const char* path,
                       std::vector<vec3>& m_TabVertices,
                       std::vector<vec2>& m_TabNormals,
                       std::vector<vec3>& m_TabTexCoords);

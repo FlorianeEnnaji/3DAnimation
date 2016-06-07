@@ -1,5 +1,9 @@
 #include "Quaternion.h"
 
+/////////////////////////////// PUBLIC ///////////////////////////////////////
+
+//============================= LIFECYCLE ====================================
+
 Quaternion::Quaternion()
 {
     m_W = 0;
@@ -7,6 +11,8 @@ Quaternion::Quaternion()
     m_Y = 0;
     m_Z = 0;
 }
+
+//============================= OPERATORS ====================================
 
 Quaternion Quaternion::operator*(const Quaternion& q)
 {
@@ -64,25 +70,11 @@ Quaternion& Quaternion::operator*=(const Quaternion &q)
     return *this;
 }
 
+//============================= OPERATIONS ===================================
+
 float Quaternion::dot(const Quaternion &q)
 {
     return (this->m_W*q.m_W + this->m_X*q.m_X + this->m_Y*q.m_Y + this->m_Z*q.m_Z);
-}
-
-void Quaternion::set(float w, float x, float y, float z)
-{
-    this->m_W = w;
-    this->m_X = x;
-    this->m_Y = y;
-    this->m_Z = z;
-}
-
-void Quaternion::setFromAxis(float angle, float ax, float ay, float az)
-{
-    this->m_W=cos(angle/2);
-    this->m_X=sin(angle/2)*ax;
-    this->m_Y=sin(angle/2)*ay;
-    this->m_Z=sin(angle/2)*az;
 }
 
 Quaternion Quaternion::conjuguate()
@@ -116,6 +108,8 @@ void Quaternion::normalize()
     this->m_W = this->m_W / norm;
 }
 
+//============================= ATTRIBUTE ACCESSORS ==========================
+
 GLMatrix Quaternion::getRotationMatrix()
 {
     GLMatrix matrix;
@@ -146,3 +140,18 @@ Vec3 Quaternion::getVec()
     return vec;
 }
 
+void Quaternion::set(float w, float x, float y, float z)
+{
+    this->m_W = w;
+    this->m_X = x;
+    this->m_Y = y;
+    this->m_Z = z;
+}
+
+void Quaternion::setFromAxis(float angle, float ax, float ay, float az)
+{
+    this->m_W=cos(angle/2);
+    this->m_X=sin(angle/2)*ax;
+    this->m_Y=sin(angle/2)*ay;
+    this->m_Z=sin(angle/2)*az;
+}

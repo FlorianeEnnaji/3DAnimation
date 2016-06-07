@@ -1,6 +1,9 @@
 #include "Camera.h"
 #include <iostream>
 
+/////////////////////////////// PUBLIC ///////////////////////////////////////
+
+//============================= LIFECYCLE ====================================
 
 Camera::Camera()
 {
@@ -21,6 +24,8 @@ Camera::Camera(Vec3 pos, Vec3 ori, float angle, float fp, float np, float ratio)
     buildProjectionMatrix();
     buildViewMatrix();
 }
+
+//============================= OPERATIONS ===================================
 
 void Camera::translate(float x, float y, float z)
 {
@@ -73,31 +78,6 @@ void Camera::rotateZ(float angle)
     this->rotate(angle,0,0,1);
 }
 
-const GLMatrix& Camera::getViewMatrix()
-{
-    return this->m_ViewMatrix;
-}
-
-void Camera::setAspectRatio(float ar)
-{
-    this->m_Ratio = ar;
-}
-
-void Camera::setPlanes(float np, float fp)
-{
-    this->m_NearPlan = np;
-    this->m_FarPlan = fp;
-}
-
-void Camera::setFOV(float angle)
-{
-    this->m_Fov = angle;
-}
-
-const GLMatrix& Camera::getProjectionMatrix()
-{
-    return this->m_ProjectionMatrix;
-}
 
 void Camera::buildViewMatrix()
 {
@@ -137,6 +117,34 @@ void Camera::buildProjectionMatrix()
     this->m_ProjectionMatrix.m[3][1] = 0;
     this->m_ProjectionMatrix.m[3][2] = -1;
     this->m_ProjectionMatrix.m[3][3] = 0;
+}
+
+//============================= ATTRIBUTE ACCESSORS ==========================
+
+const GLMatrix& Camera::getViewMatrix()
+{
+    return this->m_ViewMatrix;
+}
+
+void Camera::setAspectRatio(float ar)
+{
+    this->m_Ratio = ar;
+}
+
+void Camera::setPlanes(float np, float fp)
+{
+    this->m_NearPlan = np;
+    this->m_FarPlan = fp;
+}
+
+void Camera::setFOV(float angle)
+{
+    this->m_Fov = angle;
+}
+
+const GLMatrix& Camera::getProjectionMatrix()
+{
+    return this->m_ProjectionMatrix;
 }
 
 Vec3 Camera::getPosition()

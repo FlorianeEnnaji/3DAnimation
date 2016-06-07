@@ -7,19 +7,71 @@
 class Cat : public Object3D
 {
     public:
+
+        //============================= LIFECYCLE ====================================
+        /**************************************************************************
+        * Name:Cat
+        * Description: default constructor
+        **************************************************************************/
         Cat();
+
+        //============================= OPERATIONS ===================================
+        /**************************************************************************
+        * Name:walk
+        * Description: begin or stop the walk animation on the 3D model
+        **************************************************************************/
         void walk();
+
+        /**************************************************************************
+        * Name: run
+        * Description: begin or stop the run animation on the 3D model
+        **************************************************************************/
         void run();
+
+        /**************************************************************************
+        * Name: jump
+        * Description: begin or stop the jump animation on the 3D model
+        **************************************************************************/
         void jump();
 
     protected:
+        //============================= OPERATIONS ===================================
+        /**************************************************************************
+        * Name:drawShape
+        * Description: draw a Shape with a given shader
+        * Input : shader_name: the name of the shader
+        **************************************************************************/
         void drawShape( const char* shader_name );
-
-    protected:
+        /**************************************************************************
+        * Name: anim
+        * Description: launches the animation of the 3D model
+        **************************************************************************/
         void anim();
+        /**************************************************************************
+        * Name: walkAnim
+        * Description: launches the walk animation of the 3D model
+        **************************************************************************/
         void walkAnim();
+        /**************************************************************************
+        * Name: runAnim
+        * Description: launches the run animation of the 3D model
+        **************************************************************************/
         void runAnim();
+        /**************************************************************************
+        * Name: jumpAnim
+        * Description: launches the jump animation of the 3D model
+        **************************************************************************/
         void jumpAnim();
+
+        //============================= ATTRIBUTE ACCESSORS ==========================
+        /**************************************************************************
+        * Name: setTabVertices
+        * Description: set the table of vertices
+        * Inputs:
+            - origin: the original vertices table
+            - destination: the destination vertices table
+            - interval : the interval between the origin and the destination
+        **************************************************************************/
         void setTabVertices(std::vector< vec3 > origin, std::vector< vec3 > destination, int interval);
 
     protected:
