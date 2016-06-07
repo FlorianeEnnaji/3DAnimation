@@ -20,9 +20,6 @@ HEADERS += \
     ../../Common/GlWindow.h \
     ../../Common/LF_String.h \
     ../../Common/Object3D.h \
-    ../../Common/RandomNumberGenerator.h \
-    ../../Common/Shapes/Shape.h \
-    ../../Common/Shapes/ParametricShape.h \
     ../../Common/Camera.h \
     ../../Common/Quaternion.h \
     src/RW.h \
@@ -30,13 +27,10 @@ HEADERS += \
     src/objloader.h
 
 SOURCES += \
-    ../../Common/RandomNumberGenerator.cpp \
     ../../Common/GlFramework.cpp \
     ../../Common/GlWindow.cpp \
     ../../Common/LF_String.cpp \
     ../../Common/Object3D.cpp \
-    ../../Common/Shapes/Shape.cpp \
-    ../../Common/Shapes/ParametricShape.cpp \
     ../../Common/Camera.cpp \
     ../../Common/Quaternion.cpp \
     src/main.cpp \
