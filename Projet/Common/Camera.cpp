@@ -8,14 +8,14 @@ Camera::Camera() {
 
 Camera::Camera(Vec3 pos, Vec3 ori, float angle, float fp, float np, float ratio){
 
-    this->m_farPlan = fp;
-    this->m_nearPlan = np;
-    this->m_ratio = ratio;
-    this->m_fov = angle;
+    this->m_FarPlan = fp;
+    this->m_NearPlan = np;
+    this->m_Ratio = ratio;
+    this->m_Fov = angle;
     this->m_Position.x = pos.x;
     this->m_Position.y = pos.y;
     this->m_Position.z = pos.z;
-    this->m_Orientation.setFromAxis(m_fov,ori.x,ori.y,ori.z);
+    this->m_Orientation.setFromAxis(m_Fov,ori.x,ori.y,ori.z);
 
     buildProjectionMatrix();
     buildViewMatrix();
@@ -29,21 +29,21 @@ void Camera::translate(float x, float y, float z) {
 
 void Camera::translateX(float shift) {
     this->m_Position.x += shift;
-    this->m_Orientation.x += shift;
+    this->m_Orientation.m_X += shift;
 }
 
 void Camera::translateY(float shift) {
     this->m_Position.y += shift;
-    this->m_Orientation.y += shift;
+    this->m_Orientation.m_Y += shift;
 }
 
 void Camera::translateZ(float shift) {
     this->m_Position.z += shift;
-    this->m_Orientation.z += shift;
+    this->m_Orientation.m_Z += shift;
 }
 
 void Camera::rotate(float angle, float ax, float ay, float az) {
-    angle = (M_PI * m_fov / 180.0f);
+    angle = (M_PI * m_Fov / 180.0f);
     Quaternion quat;
     quat.setFromAxis(angle, ax, ay, az);
     quat.normalize();
@@ -70,16 +70,16 @@ const GLMatrix& Camera::getViewMatrix() {
 }
 
 void Camera::setAspectRatio(float ar) {
-    this->m_ratio = ar;
+    this->m_Ratio = ar;
 }
 
 void Camera::setPlanes(float np, float fp) {
-    this->m_nearPlan = np;
-    this->m_farPlan = fp;
+    this->m_NearPlan = np;
+    this->m_FarPlan = fp;
 }
 
 void Camera::setFOV(float angle) {
-    this->m_fov = angle;
+    this->m_Fov = angle;
 }
 
 const GLMatrix& Camera::getProjectionMatrix() {
@@ -99,26 +99,26 @@ void Camera::buildViewMatrix() {
 
 void Camera::buildProjectionMatrix() {
 
-    float alpha = 0.5f * (M_PI * m_fov / 180.0f);
-    float right = tan(alpha) * m_ratio * m_nearPlan;
+    float alpha = 0.5f * (M_PI * m_Fov / 180.0f);
+    float right = tan(alpha) * m_Ratio * m_NearPlan;
     float left = -right;
-    float top = tan(alpha) * m_nearPlan;
+    float top = tan(alpha) * m_NearPlan;
     float bottom = -top;
 
-    this->m_ProjectionMatrix.m[0][0] = (2*m_nearPlan) / (right - left);
+    this->m_ProjectionMatrix.m[0][0] = (2*m_NearPlan) / (right - left);
     this->m_ProjectionMatrix.m[0][1] = 0;
     this->m_ProjectionMatrix.m[0][2] = (right + left) / (right - left);
     this->m_ProjectionMatrix.m[0][3] = 0;
 
     this->m_ProjectionMatrix.m[1][0] = 0;
-    this->m_ProjectionMatrix.m[1][1] = (2*m_nearPlan) / (top - bottom);
+    this->m_ProjectionMatrix.m[1][1] = (2*m_NearPlan) / (top - bottom);
     this->m_ProjectionMatrix.m[1][2] = (top + bottom) / (top - bottom);
     this->m_ProjectionMatrix.m[1][3] = 0;
 
     this->m_ProjectionMatrix.m[2][0] = 0;
     this->m_ProjectionMatrix.m[2][1] = 0;
-    this->m_ProjectionMatrix.m[2][2] = (-m_farPlan + m_nearPlan) / (m_farPlan - m_nearPlan);
-    this->m_ProjectionMatrix.m[2][3] = (-2 * m_nearPlan * m_farPlan) / (m_farPlan * m_nearPlan);
+    this->m_ProjectionMatrix.m[2][2] = (-m_FarPlan + m_NearPlan) / (m_FarPlan - m_NearPlan);
+    this->m_ProjectionMatrix.m[2][3] = (-2 * m_NearPlan * m_FarPlan) / (m_FarPlan * m_NearPlan);
 
     this->m_ProjectionMatrix.m[3][0] = 0;
     this->m_ProjectionMatrix.m[3][1] = 0;
@@ -139,7 +139,7 @@ void Camera::setOrientation(float x, float y, float z){
 
     // update camera's orientation
 
-    m_Orientation.x = x;
-    m_Orientation.y = y;
-    m_Orientation.z = z;
+    m_Orientation.m_X = x;
+    m_Orientation.m_Y = y;
+    m_Orientation.m_Z = z;
 }

@@ -8,24 +8,28 @@ class Quaternion: public Vec3
 {
     private:
 
-
     public:
-    float w;
-    float x;
-    float y;
-    float z;
+
+        float m_W;
+        float m_X;
+        float m_Y;
+        float m_Z;
+
         Quaternion();
-        Quaternion operator*(const Quaternion& q);
-        Vec3 operator*(const Vec3& v);
         Quaternion operator*(float f);
+        Quaternion operator*(const Quaternion& q);
         Quaternion operator+(const Quaternion &q);
         Quaternion& operator*=(const Quaternion &q);
-        float dot(const Quaternion &q);
-        void set(float w, float x, float y, float z);
-        void setFromAxis(float angle, float ax, float ay, float az);
         Quaternion conjuguate();
         Quaternion slerp(const Quaternion& q1, const Quaternion& q2, float t);
+
+        Vec3 operator*(const Vec3& v);
+        float dot(const Quaternion &q);
         void normalize();
+
+        void set(float m_W, float m_X, float m_Y, float m_Z);
+        void setFromAxis(float angle, float ax, float ay, float az);
+
         GLMatrix getRotationMatrix();
         Vec3 getVec();
 };

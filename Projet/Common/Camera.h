@@ -13,7 +13,7 @@ class Camera {
         Quaternion m_Orientation;
         GLMatrix m_ViewMatrix;
         GLMatrix m_ProjectionMatrix;
-        float m_fov, m_nearPlan, m_farPlan, m_ratio;
+        float m_Fov, m_NearPlan, m_FarPlan, m_Ratio;
 
     public:
         Camera();
@@ -26,16 +26,20 @@ class Camera {
         void rotateX(float angle);
         void rotateY(float angle);
         void rotateZ(float angle);
+
         const GLMatrix& getViewMatrix();
-        void setAspectRatio(float ar);
-        void setPlanes(float np, float fp);
-        void setFOV(float angle);
-        const GLMatrix& getProjectionMatrix();
         void buildViewMatrix();
+
+        const GLMatrix& getProjectionMatrix();
         void buildProjectionMatrix();
+
         Vec3 getPosition();
         Quaternion getOrientation();
         void setOrientation(float x, float y, float z);
+
+        void setAspectRatio(float ar);
+        void setPlanes(float np, float fp);
+        void setFOV(float angle);
 
 };
 #endif // CAMERA_H

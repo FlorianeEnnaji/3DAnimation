@@ -24,7 +24,7 @@ class ObjLoader
 {
 public:
 
-     bool loadOBJ(
+     bool loadObj(
              const char * path,
               std::vector<vec3> & m_TabVertices,
               std::vector<vec2> & m_TabNormals,

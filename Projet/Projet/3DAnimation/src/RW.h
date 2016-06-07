@@ -11,9 +11,9 @@ class RW : public GlWindow
 {
     private:
     Camera* m_Camera;
-    Vec2 m_mousePosition;
-    float m_currentRotationX;
-    float m_currentRotationY;
+    Vec2 m_MousePosition;
+    float m_CurrentRotationX;
+    float m_CurrentRotationY;
 
 	public:
         RW();

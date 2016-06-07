@@ -3,7 +3,7 @@
 
 
 #include "../../Common/Object3D.h"
-#include "objloader.h"
+#include "ObjLoader.h"
 
 class Cat : public Object3D
 {
@@ -25,9 +25,9 @@ protected:
 
 protected:
 
-    int m_animType;
-    int m_stepOfAnim;
-    ObjLoader* obj;
+    int m_AnimType;
+    int m_StepOfAnim;
+    ObjLoader* m_Obj;
 
     std::vector< vec3 > m_TabVerticesOriginal;
     std::vector< vec2 > m_TabTexCoordsOriginal;
@@ -38,59 +38,59 @@ protected:
     std::vector< vec3 > m_TabNormals;
 
 
-    std::vector< vec3 > m_TabVertices_walk_1;
-    std::vector< vec2 > m_TabTexCoords_walk_1;
-    std::vector< vec3 > m_TabNormals_walk_1;
+    std::vector< vec3 > m_TabVerticesWalk1;
+    std::vector< vec2 > m_TabTexCoordsWalk1;
+    std::vector< vec3 > m_TabNormalsWalk1;
 
-    std::vector< vec3 > m_TabVertices_walk_2;
-    std::vector< vec2 > m_TabTexCoords_walk_2;
-    std::vector< vec3 > m_TabNormals_walk_2;
-
-
-    std::vector< vec3 > m_TabVertices_run_1;
-    std::vector< vec2 > m_TabTexCoords_run_1;
-    std::vector< vec3 > m_TabNormals_run_1;
-
-    std::vector< vec3 > m_TabVertices_run_2;
-    std::vector< vec2 > m_TabTexCoords_run_2;
-    std::vector< vec3 > m_TabNormals_run_2;
-
-    std::vector< vec3 > m_TabVertices_run_3;
-    std::vector< vec2 > m_TabTexCoords_run_3;
-    std::vector< vec3 > m_TabNormals_run_3;
-
-    std::vector< vec3 > m_TabVertices_run_4;
-    std::vector< vec2 > m_TabTexCoords_run_4;
-    std::vector< vec3 > m_TabNormals_run_4;
+    std::vector< vec3 > m_TabVerticesWalk2;
+    std::vector< vec2 > m_TabTexCoordsWalk2;
+    std::vector< vec3 > m_TabNormalsWalk2;
 
 
-    std::vector< vec3 > m_TabVertices_jump_1;
-    std::vector< vec2 > m_TabTexCoords_jump_1;
-    std::vector< vec3 > m_TabNormals_jump_1;
+    std::vector< vec3 > m_TabVerticesRun1;
+    std::vector< vec2 > m_TabTexCoordsRun1;
+    std::vector< vec3 > m_TabNormalsRun1;
 
-    std::vector< vec3 > m_TabVertices_jump_2;
-    std::vector< vec2 > m_TabTexCoords_jump_2;
-    std::vector< vec3 > m_TabNormals_jump_2;
+    std::vector< vec3 > m_TabVerticesRun2;
+    std::vector< vec2 > m_TabTexCoordsRun2;
+    std::vector< vec3 > m_TabNormalsRun2;
 
-    std::vector< vec3 > m_TabVertices_jump_3;
-    std::vector< vec2 > m_TabTexCoords_jump_3;
-    std::vector< vec3 > m_TabNormals_jump_3;
+    std::vector< vec3 > m_TabVerticesRun3;
+    std::vector< vec2 > m_TabTexCoordsRun3;
+    std::vector< vec3 > m_TabNormalsRun3;
 
-    std::vector< vec3 > m_TabVertices_jump_4;
-    std::vector< vec2 > m_TabTexCoords_jump_4;
-    std::vector< vec3 > m_TabNormals_jump_4;
+    std::vector< vec3 > m_TabVerticesRun4;
+    std::vector< vec2 > m_TabTexCoordsRun4;
+    std::vector< vec3 > m_TabNormalsRun4;
 
-    std::vector< vec3 > m_TabVertices_jump_5;
-    std::vector< vec2 > m_TabTexCoords_jump_5;
-    std::vector< vec3 > m_TabNormals_jump_5;
 
-    std::vector< vec3 > m_TabVertices_jump_6;
-    std::vector< vec2 > m_TabTexCoords_jump_6;
-    std::vector< vec3 > m_TabNormals_jump_6;
+    std::vector< vec3 > m_TabVerticesJump1;
+    std::vector< vec2 > m_TabTexCoordsJump1;
+    std::vector< vec3 > m_TabNormalsJump1;
 
-    std::vector< vec3 > m_TabVertices_jump_7;
-    std::vector< vec2 > m_TabTexCoords_jump_7;
-    std::vector< vec3 > m_TabNormals_jump_7;
+    std::vector< vec3 > m_TabVerticesJump2;
+    std::vector< vec2 > m_TabTexCoordsJump2;
+    std::vector< vec3 > m_TabNormalsJump2;
+
+    std::vector< vec3 > m_TabVerticesJump3;
+    std::vector< vec2 > m_TabTexCoordsJump3;
+    std::vector< vec3 > m_TabNormalsJump3;
+
+    std::vector< vec3 > m_TabVerticesJump4;
+    std::vector< vec2 > m_TabTexCoordsJump4;
+    std::vector< vec3 > m_TabNormalsJump4;
+
+    std::vector< vec3 > m_TabVerticesJump5;
+    std::vector< vec2 > m_TabTexCoordsJump5;
+    std::vector< vec3 > m_TabNormalsJump5;
+
+    std::vector< vec3 > m_TabVerticesJump6;
+    std::vector< vec2 > m_TabTexCoordsJump6;
+    std::vector< vec3 > m_TabNormalsJump6;
+
+    std::vector< vec3 > m_TabVerticesJump7;
+    std::vector< vec2 > m_TabTexCoordsJump7;
+    std::vector< vec3 > m_TabNormalsJump7;
 
 };
 

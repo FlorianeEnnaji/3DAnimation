@@ -24,7 +24,7 @@ HEADERS += \
     ../../Common/Quaternion.h \
     src/RW.h \
     src/Cat.h \
-    src/objloader.h
+    src/ObjLoader.h
 
 SOURCES += \
     ../../Common/GlFramework.cpp \
@@ -36,7 +36,7 @@ SOURCES += \
     src/main.cpp \
     src/RW.cpp \
     src/Cat.cpp \
-    src/objloader.cpp
+    src/ObjLoader.cpp
 
 DISTFILES +=
 

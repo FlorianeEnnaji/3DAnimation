@@ -1,4 +1,4 @@
-#include "objloader.h"
+#include "ObjLoader.h"
 
 #include <vector>
 #include <stdio.h>
@@ -7,7 +7,7 @@
 #include <iostream>
 
 
-bool ObjLoader::loadOBJ(
+bool ObjLoader::loadObj(
     const char * path,
         std::vector<vec3> &tabVertices,
         std::vector<vec2> &tabNormals,

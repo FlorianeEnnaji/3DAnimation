@@ -15,14 +15,14 @@ Cat* cat;
 
 RW::RW()
 {
-    m_currentRotationX = 0.0;
-    m_currentRotationY = 0.0;
+    m_CurrentRotationX = 0.0;
+    m_CurrentRotationY = 0.0;
     setWindowTitle(trUtf8("3DAnimation"));
     cat = new Cat();
 
     Vec3 *cameraPosition = new Vec3(20,10,30);
-    m_mousePosition.x = 0;
-    m_mousePosition.y = 5;
+    m_MousePosition.x = 0;
+    m_MousePosition.y = 5;
     Vec3 *cameraOrientation = new Vec3(0,5,0);
     m_Camera = new Camera(*cameraPosition, *cameraOrientation, 70, 40, 5, 0.7);
 }
@@ -147,20 +147,20 @@ RW::mouseMoveEvent(QMouseEvent * event)
       int xDiff = mousePosition.x - middleX;
       int yDiff = mousePosition.y - middleY;
 
-      m_currentRotationY = xDiff;
-      m_currentRotationX = -yDiff;
+      m_CurrentRotationY = xDiff;
+      m_CurrentRotationX = -yDiff;
 
       middleY = middleY - 175;
       middleX = middleX - 250;
       // We don't want to rotate more than the width of the window, so we cap it.
       if(!(xDiff > middleX) && !(xDiff < -middleX)) {
-          m_Camera->setOrientation((xDiff)/mouseSensitivity,m_Camera->getOrientation().y,m_Camera->getOrientation().z);
+          m_Camera->setOrientation((xDiff)/mouseSensitivity,m_Camera->getOrientation().m_Y,m_Camera->getOrientation().m_Z);
         //m_Camera->rotateX((-yDiff)*100/MouseSensitivity);
       }
 
       // We don't want to rotate more than the height of the window, so we cap it.
       if (!(yDiff > middleY) && !(yDiff < -middleY)) {
-          m_Camera->setOrientation(m_Camera->getOrientation().x,(-yDiff)/mouseSensitivity,m_Camera->getOrientation().z);
+          m_Camera->setOrientation(m_Camera->getOrientation().m_X,(-yDiff)/mouseSensitivity,m_Camera->getOrientation().m_Z);
         //m_Camera->rotateY((-xDiff)*100/MouseSensitivity);
       }
 }
