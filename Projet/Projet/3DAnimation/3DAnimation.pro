@@ -20,8 +20,8 @@ HEADERS += \
     ../../Common/GlWindow.h \
     ../../Common/LF_String.h \
     ../../Common/Object3D.h \
-    ../../Common/Camera.h \
-    ../../Common/Quaternion.h \
+    src/Quaternion.h \
+    src/Camera.h \
     src/RW.h \
     src/Cat.h \
     src/ObjLoader.h
@@ -31,9 +31,9 @@ SOURCES += \
     ../../Common/GlWindow.cpp \
     ../../Common/LF_String.cpp \
     ../../Common/Object3D.cpp \
-    ../../Common/Camera.cpp \
-    ../../Common/Quaternion.cpp \
     src/main.cpp \
+    src/Camera.cpp\
+    src/Quaternion.cpp\
     src/RW.cpp \
     src/Cat.cpp \
     src/ObjLoader.cpp

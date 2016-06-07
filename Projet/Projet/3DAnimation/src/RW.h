@@ -1,10 +1,10 @@
-﻿#ifndef RW_h
-#define RW_h
+﻿#ifndef RW_H
+#define RW_H
 
 
 #include "../../Common/GlWindow.h"
 #include "../../Common/Types.h"
-#include "../../Common/Camera.h"
+#include "src/Camera.h"
 
 
 class RW : public GlWindow

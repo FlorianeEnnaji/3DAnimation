@@ -87,8 +87,8 @@ Quaternion Quaternion::conjuguate(){
 Quaternion Quaternion::slerp(const Quaternion& q1, const Quaternion& q2, float t){
     Quaternion quat1 = q1;
     Quaternion quat2 = q2;
-    Quaternion quatProd = quat1.operator *(quat2.conjuguate());
-    float teta = acos(quatProd.m_W);
+    Quaternion quat_prod = quat1.operator *(quat2.conjuguate());
+    float teta = acos(quat_prod.m_W);
     Quaternion quat;
 
     quat=(quat1.operator*((sin(teta)*(1-t))/sin(teta))).operator+(quat2.operator*((sin(teta)*t)/sin(teta)));

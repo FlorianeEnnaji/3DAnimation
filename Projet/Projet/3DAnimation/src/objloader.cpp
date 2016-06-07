@@ -8,14 +8,14 @@
 
 
 bool ObjLoader::loadObj(
-    const char * path,
+        const char * path,
         std::vector<vec3> &tabVertices,
         std::vector<vec2> &tabNormals,
         std::vector<vec3> &tabTexCoords
 ){
     printf("Loading OBJ file %s...\n", path);
 
-    std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
+    std::vector<unsigned int> vertex_indices, uv_indices, normal_indices;
     std::vector<vec3>  temp_vertices;
     std::vector<vec2>  temp_uvs;
     std::vector<vec3>  temp_normals;
@@ -32,85 +32,83 @@ bool ObjLoader::loadObj(
 
  while( 1 ){
 
-        char lineHeader[128];
+        char line_header[128];
         // permet de lire le premier mot de la ligne
-        int res = fscanf(file, "%s", lineHeader);
+        int res = fscanf(file, "%s", line_header);
         if (res == EOF)
             break; // EOF = End Of File. Quit the loop.
 
         // parse des vertex en fonction de l'entete
 
-       if ( strcmp( lineHeader, "v" ) == 0 ){
+       if ( strcmp( line_header, "v" ) == 0 ){
 
             vec3 vertex;
             fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z );
             temp_vertices.push_back(vertex);
            // std::cout << vertex.x << std::endl;
 
-        }else if ( strcmp( lineHeader, "vt" ) == 0 ){
+        }else if ( strcmp( line_header, "vt" ) == 0 ){
 
             vec2 uv;
             fscanf(file, "%f %f\n", &uv.x, &uv.y );
             uv.y = -uv.y;
             temp_uvs.push_back(uv);
 
-        }else if ( strcmp( lineHeader, "vn" ) == 0 ){
+        }else if ( strcmp( line_header, "vn" ) == 0 ){
 
             vec3 normal;
             fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z );
             temp_normals.push_back(normal);
 
-        }else if ( strcmp( lineHeader, "f" ) == 0 ){
+        }else if ( strcmp( line_header, "f" ) == 0 ){
 
             std::vector< std::vector<unsigned int> > face;
 
             std::string vertex1, vertex2, vertex3;
-            unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-            int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2] );
+            unsigned int vertex_index[3], uv_index[3], normal_index[3];
+            int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertex_index[0], &uv_index[0], &normal_index[0], &vertex_index[1], &uv_index[1], &normal_index[1], &vertex_index[2], &uv_index[2], &normal_index[2] );
             if (matches != 9){
                 printf("L'objet ne cotient pas de texture, le parse ne peux pas etre applique.\n");
                 return false;
             }
 
-            vertexIndices.push_back(vertexIndex[0]);
-            vertexIndices.push_back(vertexIndex[1]);
-            vertexIndices.push_back(vertexIndex[2]);
+            vertex_indices.push_back(vertex_index[0]);
+            vertex_indices.push_back(vertex_index[1]);
+            vertex_indices.push_back(vertex_index[2]);
 
-            uvIndices    .push_back(uvIndex[0]);
-            uvIndices    .push_back(uvIndex[1]);
-            uvIndices    .push_back(uvIndex[2]);
+            uv_indices    .push_back(uv_index[0]);
+            uv_indices    .push_back(uv_index[1]);
+            uv_indices    .push_back(uv_index[2]);
 
-            normalIndices.push_back(normalIndex[0]);
-            normalIndices.push_back(normalIndex[1]);
-            normalIndices.push_back(normalIndex[2]);
+            normal_indices.push_back(normal_index[0]);
+            normal_indices.push_back(normal_index[1]);
+            normal_indices.push_back(normal_index[2]);
 
         }else{
             // Probably a comment, eat up the rest of the line
-            char stupidBuffer[1000];
-            fgets(stupidBuffer, 1000, file);
+            char stupid_buffer[1000];
+            fgets(stupid_buffer, 1000, file);
         }
 
     }
 
 // For each vertex of each triangle
-        for( unsigned int i=0; i<vertexIndices.size(); i++ ){
+        for( unsigned int i=0; i<vertex_indices.size(); i++ ){
       //    std::cout << vertexIndex.size() << std::endl;
         // Get the indices of its attributes
-        unsigned int vertexIndex = vertexIndices[i];
-        unsigned int uvIndex = uvIndices[i];
-        unsigned int normalIndex = normalIndices[i];
+        unsigned int vertex_index = vertex_indices[i];
+        unsigned int uv_index = uv_indices[i];
+        unsigned int normal_index = normal_indices[i];
 
         // Get the attributes thanks to the index
-        vec3 vertex = temp_vertices[ vertexIndex-1 ];
-        vec2 uv = temp_uvs[ uvIndex-1 ];
-        vec3 normal = temp_normals[ normalIndex-1 ];
+        vec3 vertex = temp_vertices[ vertex_index-1 ];
+        vec2 uv = temp_uvs[ uv_index-1 ];
+        vec3 normal = temp_normals[ normal_index-1 ];
 
         // Put the attributes in buffers
         tabVertices.push_back(vertex);
         tabNormals.push_back(uv);
         tabTexCoords.push_back(normal);
-
-
     }
 
     return true;

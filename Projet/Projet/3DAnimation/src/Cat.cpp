@@ -1,7 +1,7 @@
 #include "Cat.h"
 #include <math.h>
 
-int step = 0;
+int g_Step = 0;
 
 Cat::Cat()
 {
@@ -36,22 +36,22 @@ void
 Cat::drawShape( const char* shader_name )
 {
     m_Framework->pushMatrix();
-    GLuint vertexbuffer;
-    glGenBuffers(1, &vertexbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    GLuint vertex_buffer;
+    glGenBuffers(1, &vertex_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, m_TabVertices.size() * sizeof(vec3), &m_TabVertices[0], GL_STATIC_DRAW);
 
-    GLuint uvbuffer;
-    glGenBuffers(1, &uvbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+    GLuint uv_buffer;
+    glGenBuffers(1, &uv_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
     glBufferData(GL_ARRAY_BUFFER, m_TabTexCoords.size() * sizeof(vec2), &m_TabTexCoords[0], GL_STATIC_DRAW);
 
     // 1rst attribute buffer : vertices
-    GLint var1 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "position" );
-    glEnableVertexAttribArray( var1 );
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    GLint pos = glGetAttribLocation( m_Framework->getCurrentShaderId(), "position" );
+    glEnableVertexAttribArray( pos );
+    glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
     glVertexAttribPointer(
-       var1,               // position
+       pos,               // position
        3,                  // because of vec3
        GL_FLOAT,           // type
        GL_FALSE,           // normalized?
@@ -59,11 +59,11 @@ Cat::drawShape( const char* shader_name )
        (void*)0            // array buffer offset
     );
 
-    GLint var2 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "color" );
-    glEnableVertexAttribArray( var2 );
-    glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+    GLint color = glGetAttribLocation( m_Framework->getCurrentShaderId(), "color" );
+    glEnableVertexAttribArray( color );
+    glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
     glVertexAttribPointer(
-       var2,               // color
+       color,               // color
        2,                  // size
        GL_FLOAT,           // type
        GL_FALSE,           // normalized?
@@ -74,8 +74,8 @@ Cat::drawShape( const char* shader_name )
     // Draw the cat with TRIANGLES primitive
     glDrawArrays(GL_TRIANGLES, 0, m_TabVertices.size() );
 
-    glDisableVertexAttribArray(var1);
-    glDisableVertexAttribArray(var2);
+    glDisableVertexAttribArray(pos);
+    glDisableVertexAttribArray(color);
     m_Framework->popMatrix();
 
     switch(m_AnimType) {
@@ -109,13 +109,13 @@ Cat::setTabVertices(std::vector< vec3 > origin, std::vector< vec3 > destination,
 void
 Cat::anim()
 {
-    if (step == 40) {
+    if (g_Step == 40) {
         m_TabVertices = m_TabVerticesOriginal;
         return;
     }
     //We finish another anim
     this->setTabVertices(m_TabVertices, m_TabVerticesOriginal, 40);
-    step++;
+    g_Step++;
 
 }
 
@@ -124,22 +124,22 @@ Cat::walkAnim()
 {
     if (m_StepOfAnim == 0) {
         //We start to walk
-        if (step == 25) {
-            step = 0;
+        if (g_Step == 25) {
+            g_Step = 0;
             m_StepOfAnim = 1;
         } else {
             this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesWalk1, 25);
-            step++;
+            g_Step++;
             return;
         }
     }
-    if (step == 50) {
+    if (g_Step == 50) {
         if (m_StepOfAnim == 1) {
             m_StepOfAnim = 2;
         } else {
             m_StepOfAnim = 1;
         }
-        step = 0;
+        g_Step = 0;
     }
     if (m_StepOfAnim == 1) {
         this->setTabVertices(m_TabVerticesWalk1, m_TabVerticesWalk2, 50);
@@ -147,7 +147,7 @@ Cat::walkAnim()
         this->setTabVertices(m_TabVerticesWalk2, m_TabVerticesWalk1, 50);
     }
 
-    step++;
+    g_Step++;
 
 }
 
@@ -156,21 +156,21 @@ Cat::runAnim()
 {
     if (m_StepOfAnim == 0) {
         //We start to run
-        if (step == 12) {
-            step = 0;
+        if (g_Step == 12) {
+            g_Step = 0;
             m_StepOfAnim = 1;
         } else {
             this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesRun1, 12);
-            step++;
+            g_Step++;
             return;
         }
     }
-    if (step == 25) {
+    if (g_Step == 25) {
         m_StepOfAnim++;
         if (m_StepOfAnim == 5) {
             m_StepOfAnim = 1;
         }
-        step = 0;
+        g_Step = 0;
     }
     if (m_StepOfAnim == 1) {
         this->setTabVertices(m_TabVerticesRun1, m_TabVerticesRun2, 25);
@@ -182,7 +182,7 @@ Cat::runAnim()
         this->setTabVertices(m_TabVerticesRun4, m_TabVerticesRun1, 25);
     }
 
-    step++;
+    g_Step++;
 }
 
 void
@@ -190,21 +190,21 @@ Cat::jumpAnim()
 {
     if (m_StepOfAnim == 0) {
         //We start to walk
-        if (step == 12) {
-            step = 0;
+        if (g_Step == 12) {
+            g_Step = 0;
             m_StepOfAnim = 1;
         } else {
             this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesJump1, 12);
-            step++;
+            g_Step++;
             return;
         }
     }
-    if (step == 25) {
+    if (g_Step == 25) {
         m_StepOfAnim++;
         if (m_StepOfAnim == 8) {
             m_StepOfAnim = 1;
         }
-        step = 0;
+        g_Step = 0;
     }
     if (m_StepOfAnim == 1) {
         this->setTabVertices(m_TabVerticesJump1, m_TabVerticesJump2, 25);
@@ -222,7 +222,7 @@ Cat::jumpAnim()
         this->setTabVertices(m_TabVerticesJump7, m_TabVerticesJump1, 25);
     }
 
-    step++;
+    g_Step++;
 }
 
 void
@@ -234,7 +234,7 @@ Cat::walk()
         this->m_AnimType = 1;
     }
     this->m_StepOfAnim = 0;
-    step = 0;
+    g_Step = 0;
 
 }
 
@@ -247,7 +247,7 @@ Cat::run()
         this->m_AnimType = 2;
     }
     this->m_StepOfAnim = 0;
-    step = 0;
+    g_Step = 0;
 }
 
 void
@@ -259,5 +259,5 @@ Cat::jump()
         this->m_AnimType = 3;
     }
     this->m_StepOfAnim = 0;
-    step = 0;
+    g_Step = 0;
 }

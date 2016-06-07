@@ -5,32 +5,26 @@
 
 using namespace std;
 
-
-GLfloat angle1 = 30.0f;
-GLfloat angle2 = 0.0f;
-
-const GLfloat g_AngleSpeed = 10.0f;
-
-Cat* cat;
+Cat* g_Cat;
 
 RW::RW()
 {
     m_CurrentRotationX = 0.0;
     m_CurrentRotationY = 0.0;
     setWindowTitle(trUtf8("3DAnimation"));
-    cat = new Cat();
+    g_Cat = new Cat();
 
-    Vec3 *cameraPosition = new Vec3(20,10,30);
+    Vec3 *camera_position = new Vec3(20,10,30);
     m_MousePosition.x = 0;
     m_MousePosition.y = 5;
-    Vec3 *cameraOrientation = new Vec3(0,5,0);
-    m_Camera = new Camera(*cameraPosition, *cameraOrientation, 70, 40, 5, 0.7);
+    Vec3 *camera_orientation = new Vec3(0,5,0);
+    m_Camera = new Camera(*camera_position, *camera_orientation, 70, 40, 5, 0.7);
 }
 
 
 RW::~RW()
 {
-    delete cat;
+    delete g_Cat;
     delete m_Camera;
 }
 
@@ -63,8 +57,8 @@ void
 RW::render()
 {
     Quaternion orientation = m_Camera->getOrientation();
-    lookAt( m_Camera->getPosition().x , m_Camera->getPosition().y, m_Camera->getPosition().z
-                ,orientation.getVec().x, orientation.getVec().y, orientation.getVec().z);
+    lookAt( m_Camera->getPosition().x , m_Camera->getPosition().y, m_Camera->getPosition().z,
+            orientation.getVec().x, orientation.getVec().y, orientation.getVec().z);
 
 
     m_Camera->buildViewMatrix();
@@ -72,7 +66,7 @@ RW::render()
 
     // Rendu des objets
 	pushMatrix();
-    cat->draw();
+    g_Cat->draw();
     popMatrix();
 }
 
@@ -112,15 +106,15 @@ RW::keyPressEvent( QKeyEvent* event )
         break;
 
     case Qt::Key_W:
-        cat->walk();
+        g_Cat->walk();
         break;
 
     case Qt::Key_R:
-        cat->run();
+        g_Cat->run();
         break;
 
     case Qt::Key_J:
-        cat->jump();
+        g_Cat->jump();
         break;
     }
 }
@@ -132,35 +126,35 @@ RW::mouseMoveEvent(QMouseEvent * event)
     float mouseSensitivity = 10.0;
 
       // the middle of the screen in the x direction
-      int middleX = 1024/2;
+      int middle_x = 1024/2;
       // the middle of the screen in the y direction
-      int middleY = 768/2;
+      int middle_y = 768/2;
 
       // This function gets the position of the mouse
-      Vec2 mousePosition = Vec2(event->pos().x(), event->pos().y());
+      Vec2 mouse_position = Vec2(event->pos().x(), event->pos().y());
 
       // if the mouse hasn't moved, return
-      if((mousePosition.x == middleX) && (mousePosition.y == middleY))
+      if((mouse_position.x == middle_x) && (mouse_position.y == middle_y))
         return;
 
       // otherwise move the mouse back to the middle of the screen
-      int xDiff = mousePosition.x - middleX;
-      int yDiff = mousePosition.y - middleY;
+      int x_diff = mouse_position.x - middle_x;
+      int y_diff = mouse_position.y - middle_y;
 
-      m_CurrentRotationY = xDiff;
-      m_CurrentRotationX = -yDiff;
+      m_CurrentRotationY = x_diff;
+      m_CurrentRotationX = -y_diff;
 
-      middleY = middleY - 175;
-      middleX = middleX - 250;
+      middle_y = middle_y - 175;
+      middle_x = middle_x - 250;
       // We don't want to rotate more than the width of the window, so we cap it.
-      if(!(xDiff > middleX) && !(xDiff < -middleX)) {
-          m_Camera->setOrientation((xDiff)/mouseSensitivity,m_Camera->getOrientation().m_Y,m_Camera->getOrientation().m_Z);
+      if(!(x_diff > middle_x) && !(x_diff < -middle_x)) {
+          m_Camera->setOrientation((x_diff)/mouseSensitivity,m_Camera->getOrientation().m_Y,m_Camera->getOrientation().m_Z);
         //m_Camera->rotateX((-yDiff)*100/MouseSensitivity);
       }
 
       // We don't want to rotate more than the height of the window, so we cap it.
-      if (!(yDiff > middleY) && !(yDiff < -middleY)) {
-          m_Camera->setOrientation(m_Camera->getOrientation().m_X,(-yDiff)/mouseSensitivity,m_Camera->getOrientation().m_Z);
+      if (!(y_diff > middle_y) && !(y_diff < -middle_y)) {
+          m_Camera->setOrientation(m_Camera->getOrientation().m_X,(-y_diff)/mouseSensitivity,m_Camera->getOrientation().m_Z);
         //m_Camera->rotateY((-xDiff)*100/MouseSensitivity);
       }
 }
