@@ -20,29 +20,23 @@ HEADERS += \
     ../../Common/GlWindow.h \
     ../../Common/LF_String.h \
     ../../Common/Object3D.h \
-    ../../Common/RandomNumberGenerator.h \
-    ../../Common/Shapes/Shape.h \
-    ../../Common/Shapes/ParametricShape.h \
-    ../../Common/Camera.h \
-    ../../Common/Quaternion.h \
+    src/Quaternion.h \
+    src/Camera.h \
     src/RW.h \
     src/Cat.h \
-    src/objloader.h
+    src/ObjLoader.h
 
 SOURCES += \
-    ../../Common/RandomNumberGenerator.cpp \
     ../../Common/GlFramework.cpp \
     ../../Common/GlWindow.cpp \
     ../../Common/LF_String.cpp \
     ../../Common/Object3D.cpp \
-    ../../Common/Shapes/Shape.cpp \
-    ../../Common/Shapes/ParametricShape.cpp \
-    ../../Common/Camera.cpp \
-    ../../Common/Quaternion.cpp \
     src/main.cpp \
+    src/Camera.cpp\
+    src/Quaternion.cpp\
     src/RW.cpp \
     src/Cat.cpp \
-    src/objloader.cpp
+    src/ObjLoader.cpp
 
 DISTFILES +=
 

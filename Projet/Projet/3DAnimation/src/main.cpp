@@ -11,7 +11,7 @@
 
 
 #include "RW.h"
-#include "objloader.h"
+#include "ObjLoader.h"
 
 #include <QApplication>
 

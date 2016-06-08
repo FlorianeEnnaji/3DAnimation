@@ -1,37 +1,62 @@
-﻿#ifndef RW_h
-#define RW_h
-
+﻿#ifndef RW_H
+#define RW_H
 
 #include "../../Common/GlWindow.h"
 #include "../../Common/Types.h"
-#include "../../Common/Camera.h"
-
+#include "src/Camera.h"
 
 class RW : public GlWindow
 {
     private:
-    Camera* m_Camera;
-    Vec2 m_mousePosition;
-    float m_currentRotationX;
-    float m_currentRotationY;
+        Camera* m_Camera;
+        Vec2 m_MousePosition;
+        float m_CurrentRotationX;
+        float m_CurrentRotationY;
 
 	public:
+
+        //============================= LIFECYCLE ====================================
+        /**************************************************************************
+        * Name: RW
+        * Description: default constructor
+        **************************************************************************/
         RW();
+
+        /**************************************************************************
+        * Name: ~RW
+        * Description: the destructor
+        **************************************************************************/
         ~RW();
 
-		/*!
-		*\brief Initialization des objets.
-		*/
+        //============================= OPERATIONS ===================================
+        /**************************************************************************
+        * Name: initializeObjects
+        * Description: Initialization of objects
+        * Returns:
+            - bool: return always true
+        **************************************************************************/
 		bool initializeObjects();
 
-		/*!
-		*\brief Rendu de la scène.
-		*/
+        /**************************************************************************
+        * Name: render
+        * Description: render of the scene
+        **************************************************************************/
 		void render();
 
-		void keyPressEvent(QKeyEvent *);
-        void mouseMoveEvent(QMouseEvent *);
+        /**************************************************************************
+        * Name: keyPressEvent
+        * Description: do actions depending on which key was pressed
+        * Inputs:
+            - QKeyEvent*: the key press event
+        **************************************************************************/
+        void keyPressEvent(QKeyEvent*);
+        /**************************************************************************
+        * Name: mouseMoveEvent
+        * Description: do actions depending on the mouse move
+        * Inputs:
+            - QMouseEvent*: the mouse move event
+        **************************************************************************/
+        void mouseMoveEvent(QMouseEvent*);
 };
-
 
 #endif
