@@ -1,8 +1,8 @@
 #ifndef QUATERNION_H
 #define QUATERNION_H
 
-#include "../common/Vectors.h"
-#include "../common/GlFramework.h"
+#include "../../Common/Vectors.h"
+#include "../../Common/GlFramework.h"
 
 class Quaternion: public Vec3
 {

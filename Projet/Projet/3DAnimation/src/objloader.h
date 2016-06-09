@@ -4,10 +4,10 @@
 #include <GL/glew.h>
 #define QT_NO_OPENGL_ES_2
 
-#include "Types.h"
-#include "Object3D.h"
+#include "../../Common/Types.h"
+#include "../../Common/Object3D.h"
 #include <vector>
-#include <Vectors.h>
+#include <../../Common/Vectors.h>
 #include <iostream>
 
 struct vec2
