@@ -90,12 +90,12 @@ void Cat::drawShape( const char* shader_name )
     GLuint vertex_buffer;
     glGenBuffers(1, &vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-    glBufferData(GL_ARRAY_BUFFER, m_TabVertices.size() * sizeof(vec3), &m_TabVertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, m_TabVertices.size() * sizeof(Vec3), &m_TabVertices[0], GL_STATIC_DRAW);
 
     GLuint uv_buffer;
     glGenBuffers(1, &uv_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
-    glBufferData(GL_ARRAY_BUFFER, m_TabTexCoords.size() * sizeof(vec2), &m_TabTexCoords[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, m_TabTexCoords.size() * sizeof(Vec2), &m_TabTexCoords[0], GL_STATIC_DRAW);
 
     // 1rst attribute buffer : vertices
     GLint pos = glGetAttribLocation( m_Framework->getCurrentShaderId(), "position" );
@@ -103,7 +103,7 @@ void Cat::drawShape( const char* shader_name )
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
     glVertexAttribPointer(
        pos,               // position
-       3,                  // because of vec3
+       3,                  // because of Vec3
        GL_FLOAT,           // type
        GL_FALSE,           // normalized?
        0,                  // stride
@@ -307,7 +307,7 @@ void Cat::jumpAnim()
 
 //============================= ATTRIBUTE ACCESSORS ==========================
 
-void Cat::setTabVertices(std::vector< vec3 > origin, std::vector< vec3 > destination, int interval)
+void Cat::setTabVertices(std::vector< Vec3 > origin, std::vector< Vec3 > destination, int interval)
 {
     for (int i = 0; i < m_TabVertices.size(); i++)
     {

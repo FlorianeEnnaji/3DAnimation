@@ -2,8 +2,8 @@
 #define CAMERA_H
 
 
-#include "Vectors.h"
-#include "GlFramework.h"
+#include "../../Common/Vectors.h"
+#include "../../Common/GlFramework.h"
 #include "Quaternion.h"
 
 class Camera {
