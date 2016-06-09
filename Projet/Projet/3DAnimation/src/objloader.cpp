@@ -17,15 +17,15 @@ ObjLoader::ObjLoader()
 
 //============================= OPERATIONS ===================================
 
-bool ObjLoader::loadObj(const char* path, std::vector<vec3>& tabVertices,
-                        std::vector<vec2>& tabNormals, std::vector<vec3>& tabTexCoords)
+bool ObjLoader::loadObj(const char* path, std::vector<Vec3>& tabVertices,
+                        std::vector<Vec2>& tabNormals, std::vector<Vec3>& tabTexCoords)
 {
     printf("Loading OBJ file %s...\n", path);
 
     std::vector<unsigned int> vertex_indices, uv_indices, normal_indices;
-    std::vector<vec3> temp_vertices;
-    std::vector<vec2> temp_uvs;
-    std::vector<vec3> temp_normals;
+    std::vector<Vec3> temp_vertices;
+    std::vector<Vec2> temp_uvs;
+    std::vector<Vec3> temp_normals;
 
     FILE* file = fopen(path, "r");
 
@@ -52,14 +52,14 @@ bool ObjLoader::loadObj(const char* path, std::vector<vec3>& tabVertices,
 
        if ( strcmp( line_header, "v" ) == 0 )
        {
-            vec3 vertex;
+            Vec3 vertex;
             fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z );
             temp_vertices.push_back(vertex);
            // std::cout << vertex.x << std::endl;
         }
        else if ( strcmp( line_header, "vt" ) == 0 )
        {
-            vec2 uv;
+            Vec2 uv;
             fscanf(file, "%f %f\n", &uv.x, &uv.y );
             uv.y = -uv.y;
             temp_uvs.push_back(uv);
@@ -67,7 +67,7 @@ bool ObjLoader::loadObj(const char* path, std::vector<vec3>& tabVertices,
         }
        else if ( strcmp( line_header, "vn" ) == 0 )
        {
-            vec3 normal;
+            Vec3 normal;
             fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z );
             temp_normals.push_back(normal);
 
@@ -116,9 +116,9 @@ bool ObjLoader::loadObj(const char* path, std::vector<vec3>& tabVertices,
         unsigned int normal_index = normal_indices[i];
 
         // Get the attributes thanks to the index
-        vec3 vertex = temp_vertices[ vertex_index-1 ];
-        vec2 uv = temp_uvs[ uv_index-1 ];
-        vec3 normal = temp_normals[ normal_index-1 ];
+        Vec3 vertex = temp_vertices[ vertex_index-1 ];
+        Vec2 uv = temp_uvs[ uv_index-1 ];
+        Vec3 normal = temp_normals[ normal_index-1 ];
 
         // Put the attributes in buffers
         tabVertices.push_back(vertex);

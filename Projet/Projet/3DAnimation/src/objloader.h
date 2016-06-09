@@ -10,19 +10,6 @@
 #include <../../Common/Vectors.h>
 #include <iostream>
 
-struct vec2
-{
-    float x;
-    float y;
-};
-
-struct vec3
-{
-    float x;
-    float y;
-    float z;
-};
-
 class ObjLoader
 {
     public:
@@ -47,9 +34,9 @@ class ObjLoader
             - value: description of the returned value
         **************************************************************************/
         bool loadObj(const char* path,
-                      std::vector<vec3>& m_TabVertices,
-                      std::vector<vec2>& m_TabNormals,
-                      std::vector<vec3>& m_TabTexCoords);
+                      std::vector<Vec3>& m_TabVertices,
+                      std::vector<Vec2>& m_TabNormals,
+                      std::vector<Vec3>& m_TabTexCoords);
 };
 
 #endif // OBJLOADER_H
