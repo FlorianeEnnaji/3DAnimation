@@ -58,6 +58,12 @@ class RW : public GlWindow
         **************************************************************************/
         void mouseMoveEvent(QMouseEvent*);
 
+        /**************************************************************************
+        * Name: wheelEvent
+        * Description: do actions depending on the mouse's scroll wheel move
+        * Inputs:
+            - QWheelEvent*: the wheel move event
+        **************************************************************************/
         void wheelEvent(QWheelEvent*);
 };
 
