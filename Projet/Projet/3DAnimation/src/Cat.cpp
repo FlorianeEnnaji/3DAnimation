@@ -16,19 +16,19 @@ Cat::Cat()
 
     GLboolean loaded2 = m_Obj->loadObj("../model/cat_walk_1.obj",m_TabVerticesWalk1,m_TabTexCoordsWalk1,m_TabNormalsWalk1);
     GLboolean loaded3 = m_Obj->loadObj("../model/cat_walk_2.obj",m_TabVerticesWalk2,m_TabTexCoordsWalk2,m_TabNormalsWalk2);
-
-    GLboolean loaded4 = m_Obj->loadObj("../model/cat_run_1.obj",m_TabVerticesRun1,m_TabTexCoordsRun1,m_TabNormalsRun1);
-    GLboolean loaded5 = m_Obj->loadObj("../model/cat_run_2.obj",m_TabVerticesRun2,m_TabTexCoordsRun2,m_TabNormalsRun2);
-    GLboolean loaded6 = m_Obj->loadObj("../model/cat_run_3.obj",m_TabVerticesRun3,m_TabTexCoordsRun3,m_TabNormalsRun3);
-    GLboolean loaded7 = m_Obj->loadObj("../model/cat_run_4.obj",m_TabVerticesRun4,m_TabTexCoordsRun4,m_TabNormalsRun4);
-
-    GLboolean loaded8 = m_Obj->loadObj("../model/cat_jump_1.obj",m_TabVerticesJump1,m_TabTexCoordsJump1,m_TabNormalsJump1);
-    GLboolean loaded9 = m_Obj->loadObj("../model/cat_jump_2.obj",m_TabVerticesJump2,m_TabTexCoordsJump2,m_TabNormalsJump2);
-    GLboolean loaded10 = m_Obj->loadObj("../model/cat_jump_3.obj",m_TabVerticesJump3,m_TabTexCoordsJump3,m_TabNormalsJump3);
-    GLboolean loaded11 = m_Obj->loadObj("../model/cat_jump_4.obj",m_TabVerticesJump4,m_TabTexCoordsJump4,m_TabNormalsJump4);
-    GLboolean loaded12 = m_Obj->loadObj("../model/cat_jump_5.obj",m_TabVerticesJump5,m_TabTexCoordsJump5,m_TabNormalsJump5);
-    GLboolean loaded13 = m_Obj->loadObj("../model/cat_jump_6.obj",m_TabVerticesJump6,m_TabTexCoordsJump6,m_TabNormalsJump6);
-    GLboolean loaded14 = m_Obj->loadObj("../model/cat_jump_7.obj",m_TabVerticesJump7,m_TabTexCoordsJump7,m_TabNormalsJump7);
+   //
+   // GLboolean loaded4 = m_Obj->loadObj("../model/cat_run_1.obj",m_TabVerticesRun1,m_TabTexCoordsRun1,m_TabNormalsRun1);
+   // GLboolean loaded5 = m_Obj->loadObj("../model/cat_run_2.obj",m_TabVerticesRun2,m_TabTexCoordsRun2,m_TabNormalsRun2);
+   // GLboolean loaded6 = m_Obj->loadObj("../model/cat_run_3.obj",m_TabVerticesRun3,m_TabTexCoordsRun3,m_TabNormalsRun3);
+   // GLboolean loaded7 = m_Obj->loadObj("../model/cat_run_4.obj",m_TabVerticesRun4,m_TabTexCoordsRun4,m_TabNormalsRun4);
+   //
+   // GLboolean loaded8 = m_Obj->loadObj("../model/cat_jump_1.obj",m_TabVerticesJump1,m_TabTexCoordsJump1,m_TabNormalsJump1);
+   // GLboolean loaded9 = m_Obj->loadObj("../model/cat_jump_2.obj",m_TabVerticesJump2,m_TabTexCoordsJump2,m_TabNormalsJump2);
+   // GLboolean loaded10 = m_Obj->loadObj("../model/cat_jump_3.obj",m_TabVerticesJump3,m_TabTexCoordsJump3,m_TabNormalsJump3);
+   // GLboolean loaded11 = m_Obj->loadObj("../model/cat_jump_4.obj",m_TabVerticesJump4,m_TabTexCoordsJump4,m_TabNormalsJump4);
+   // GLboolean loaded12 = m_Obj->loadObj("../model/cat_jump_5.obj",m_TabVerticesJump5,m_TabTexCoordsJump5,m_TabNormalsJump5);
+   // GLboolean loaded13 = m_Obj->loadObj("../model/cat_jump_6.obj",m_TabVerticesJump6,m_TabTexCoordsJump6,m_TabNormalsJump6);
+   // GLboolean loaded14 = m_Obj->loadObj("../model/cat_jump_7.obj",m_TabVerticesJump7,m_TabTexCoordsJump7,m_TabNormalsJump7);
 
     m_TabVertices = m_TabVerticesOriginal;
     m_TabTexCoords = m_TabTexCoordsOriginal;
