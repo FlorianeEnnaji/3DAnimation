@@ -155,6 +155,16 @@ void RW::keyPressEvent( QKeyEvent* event )
     }
 }
 
+void RW::wheelEvent(QWheelEvent * event)
+{
+    std::cout << event->delta() << std::endl;
+    if (event->delta() < 0) {
+        m_Camera->translateZ(1);
+    } else {
+        m_Camera->translateZ(-1);
+    }
+}
+
 void RW::mouseMoveEvent(QMouseEvent * event)
 {
     this->setMouseTracking(true);

@@ -57,6 +57,8 @@ class RW : public GlWindow
             - QMouseEvent*: the mouse move event
         **************************************************************************/
         void mouseMoveEvent(QMouseEvent*);
+
+        void wheelEvent(QWheelEvent*);
 };
 
 #endif
