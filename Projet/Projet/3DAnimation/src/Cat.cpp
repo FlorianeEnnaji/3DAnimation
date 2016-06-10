@@ -16,11 +16,11 @@ Cat::Cat()
 
     GLboolean loaded2 = m_Obj->loadObj("../model/cat_walk_1.obj",m_TabVerticesWalk1,m_TabTexCoordsWalk1,m_TabNormalsWalk1);
     GLboolean loaded3 = m_Obj->loadObj("../model/cat_walk_2.obj",m_TabVerticesWalk2,m_TabTexCoordsWalk2,m_TabNormalsWalk2);
-   //
-   // GLboolean loaded4 = m_Obj->loadObj("../model/cat_run_1.obj",m_TabVerticesRun1,m_TabTexCoordsRun1,m_TabNormalsRun1);
-   // GLboolean loaded5 = m_Obj->loadObj("../model/cat_run_2.obj",m_TabVerticesRun2,m_TabTexCoordsRun2,m_TabNormalsRun2);
-   // GLboolean loaded6 = m_Obj->loadObj("../model/cat_run_3.obj",m_TabVerticesRun3,m_TabTexCoordsRun3,m_TabNormalsRun3);
-   // GLboolean loaded7 = m_Obj->loadObj("../model/cat_run_4.obj",m_TabVerticesRun4,m_TabTexCoordsRun4,m_TabNormalsRun4);
+
+    GLboolean loaded4 = m_Obj->loadObj("../model/cat_run_1.obj",m_TabVerticesRun1,m_TabTexCoordsRun1,m_TabNormalsRun1);
+    GLboolean loaded5 = m_Obj->loadObj("../model/cat_run_2.obj",m_TabVerticesRun2,m_TabTexCoordsRun2,m_TabNormalsRun2);
+    GLboolean loaded6 = m_Obj->loadObj("../model/cat_run_3.obj",m_TabVerticesRun3,m_TabTexCoordsRun3,m_TabNormalsRun3);
+    GLboolean loaded7 = m_Obj->loadObj("../model/cat_run_4.obj",m_TabVerticesRun4,m_TabTexCoordsRun4,m_TabNormalsRun4);
    //
    // GLboolean loaded8 = m_Obj->loadObj("../model/cat_jump_1.obj",m_TabVerticesJump1,m_TabTexCoordsJump1,m_TabNormalsJump1);
    // GLboolean loaded9 = m_Obj->loadObj("../model/cat_jump_2.obj",m_TabVerticesJump2,m_TabTexCoordsJump2,m_TabNormalsJump2);
