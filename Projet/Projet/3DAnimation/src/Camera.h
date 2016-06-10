@@ -186,5 +186,15 @@ class Camera {
         **************************************************************************/
         void setOrientation(float x, float y, float z);
 
+        /**************************************************************************
+        * Name: setPosition
+        * Description: set the position of the camera
+        * Inputs:
+            - x: the x-coordinate
+            - y: the y-coordinate
+            - z: the z-coordinate
+        **************************************************************************/
+        void setPosition(float x, float y, float z);
+
 };
 #endif // CAMERA_H
