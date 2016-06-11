@@ -70,9 +70,9 @@ class Cat : public Object3D
         * Inputs:
             - origin: the original vertices table
             - destination: the destination vertices table
-            - interval : the interval between the origin and the destination
+            - completion : the completion of the movement (between 0 and 1)
         **************************************************************************/
-        void setTabVertices(std::vector< Vec3 > origin, std::vector< Vec3 > destination, int interval);
+        void setTabVertices(std::vector< Vec3 > origin, std::vector< Vec3 > destination, float completion);
 
     protected:
 

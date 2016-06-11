@@ -157,7 +157,7 @@ void Cat::anim()
     }
 
     //We finish another anim
-    this->setTabVertices(m_TabVertices, m_TabVerticesOriginal, 40);
+    this->setTabVertices(m_TabVertices, m_TabVerticesOriginal, g_Step/40.);
     g_Step++;
 }
 
@@ -166,19 +166,19 @@ void Cat::walkAnim()
     if (m_StepOfAnim == 0)
     {
         //We start to walk
-        if (g_Step == 25)
+        if (g_Step == 18)
         {
             g_Step = 0;
             m_StepOfAnim = 1;
         }
         else
         {
-            this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesWalk1, 25);
+            this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesWalk1, g_Step/18.);
             g_Step++;
             return;
         }
     }
-    if (g_Step == 50) {
+    if (g_Step == 36) {
         if (m_StepOfAnim == 1)
         {
             m_StepOfAnim = 2;
@@ -191,11 +191,11 @@ void Cat::walkAnim()
     }
     if (m_StepOfAnim == 1)
     {
-        this->setTabVertices(m_TabVerticesWalk1, m_TabVerticesWalk2, 50);
+        this->setTabVertices(m_TabVerticesWalk1, m_TabVerticesWalk2, g_Step/36.);
     }
     else
     {
-        this->setTabVertices(m_TabVerticesWalk2, m_TabVerticesWalk1, 50);
+        this->setTabVertices(m_TabVerticesWalk2, m_TabVerticesWalk1, g_Step/36.);
     }
 
     g_Step++;
@@ -206,19 +206,19 @@ void Cat::runAnim()
     if (m_StepOfAnim == 0)
     {
         //We start to run
-        if (g_Step == 12)
+        if (g_Step == 6)
         {
             g_Step = 0;
             m_StepOfAnim = 1;
         }
         else
         {
-            this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesRun1, 12);
+            this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesRun1, g_Step/6.);
             g_Step++;
             return;
         }
     }
-    if (g_Step == 25)
+    if (g_Step == 12)
     {
         m_StepOfAnim++;
         if (m_StepOfAnim == 5)
@@ -229,19 +229,19 @@ void Cat::runAnim()
     }
     if (m_StepOfAnim == 1)
     {
-        this->setTabVertices(m_TabVerticesRun1, m_TabVerticesRun2, 25);
+        this->setTabVertices(m_TabVerticesRun1, m_TabVerticesRun2, g_Step/12.);
     }
     else if (m_StepOfAnim == 2)
     {
-        this->setTabVertices(m_TabVerticesRun2, m_TabVerticesRun3, 25);
+        this->setTabVertices(m_TabVerticesRun2, m_TabVerticesRun3, g_Step/12.);
     }
     else if (m_StepOfAnim == 3)
     {
-        this->setTabVertices(m_TabVerticesRun3, m_TabVerticesRun4, 25);
+        this->setTabVertices(m_TabVerticesRun3, m_TabVerticesRun4, g_Step/12.);
     }
     else
     {
-        this->setTabVertices(m_TabVerticesRun4, m_TabVerticesRun1, 25);
+        this->setTabVertices(m_TabVerticesRun4, m_TabVerticesRun1, g_Step/12.);
     }
 
     g_Step++;
@@ -252,19 +252,19 @@ void Cat::jumpAnim()
     if (m_StepOfAnim == 0)
     {
         //We start to walk
-        if (g_Step == 12)
+        if (g_Step == 6)
         {
             g_Step = 0;
             m_StepOfAnim = 1;
         }
         else
         {
-            this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesJump1, 12);
+            this->setTabVertices(m_TabVerticesOriginal, m_TabVerticesJump1, g_Step/6.);
             g_Step++;
             return;
         }
     }
-    if (g_Step == 25)
+    if (g_Step == 12)
     {
         m_StepOfAnim++;
         if (m_StepOfAnim == 8)
@@ -275,31 +275,31 @@ void Cat::jumpAnim()
     }
     if (m_StepOfAnim == 1)
     {
-        this->setTabVertices(m_TabVerticesJump1, m_TabVerticesJump2, 25);
+        this->setTabVertices(m_TabVerticesJump1, m_TabVerticesJump2, g_Step/12.);
     }
     else if (m_StepOfAnim == 2)
     {
-        this->setTabVertices(m_TabVerticesJump2, m_TabVerticesJump3, 25);
+        this->setTabVertices(m_TabVerticesJump2, m_TabVerticesJump3, g_Step/12.);
     }
     else if (m_StepOfAnim == 3)
     {
-        this->setTabVertices(m_TabVerticesJump3, m_TabVerticesJump4, 25);
+        this->setTabVertices(m_TabVerticesJump3, m_TabVerticesJump4, g_Step/12.);
     }
     else if (m_StepOfAnim == 4)
     {
-        this->setTabVertices(m_TabVerticesJump4, m_TabVerticesJump5, 25);
+        this->setTabVertices(m_TabVerticesJump4, m_TabVerticesJump5, g_Step/12.);
     }
     else if (m_StepOfAnim == 5)
     {
-        this->setTabVertices(m_TabVerticesJump5, m_TabVerticesJump6, 25);
+        this->setTabVertices(m_TabVerticesJump5, m_TabVerticesJump6, g_Step/12.);
     }
     else if (m_StepOfAnim == 6)
     {
-        this->setTabVertices(m_TabVerticesJump6, m_TabVerticesJump7, 25);
+        this->setTabVertices(m_TabVerticesJump6, m_TabVerticesJump7, g_Step/12.);
     }
     else
     {
-        this->setTabVertices(m_TabVerticesJump7, m_TabVerticesJump1, 25);
+        this->setTabVertices(m_TabVerticesJump7, m_TabVerticesJump1, g_Step/12.);
     }
 
     g_Step++;
@@ -307,12 +307,12 @@ void Cat::jumpAnim()
 
 //============================= ATTRIBUTE ACCESSORS ==========================
 
-void Cat::setTabVertices(std::vector< Vec3 > origin, std::vector< Vec3 > destination, int interval)
+void Cat::setTabVertices(std::vector< Vec3 > origin, std::vector< Vec3 > destination, float completion)
 {
+    //LERP method : start + (end - start)*percent
+
     for (int i = 0; i < m_TabVertices.size(); i++)
     {
-        m_TabVertices[i].x += (destination[i].x - origin[i].x) / interval;
-        m_TabVertices[i].y += (destination[i].y - origin[i].y) / interval;
-        m_TabVertices[i].z += (destination[i].z - origin[i].z) / interval;
+        m_TabVertices[i] = origin[i] + (destination[i] - origin[i])*completion;
     }
 }
