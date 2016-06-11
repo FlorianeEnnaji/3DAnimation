@@ -11,7 +11,7 @@ Cat* g_Cat;
 
 //============================= LIFECYCLE ====================================
 
-RW::RW()
+Window::Window()
 {
     m_CurrentRotationX = 0.0;
     m_CurrentRotationY = 0.0;
@@ -26,7 +26,7 @@ RW::RW()
     m_Camera = new Camera(*camera_position, *camera_orientation, 70, 40, 5, 0.7);
 }
 
-RW::~RW()
+Window::~Window()
 {
     delete g_Cat;
     delete m_Camera;
@@ -34,7 +34,7 @@ RW::~RW()
 
 //============================= OPERATIONS ===================================
 
-bool RW::initializeObjects()
+bool Window::initializeObjects()
 {
 	// Fond gris
 	glClearColor( 0.2f, 0.2f, 0.2f, 1.0f );
@@ -56,7 +56,7 @@ bool RW::initializeObjects()
 	return true;
 }
 
-void RW::render()
+void Window::render()
 {
     Quaternion orientation = m_Camera->getOrientation();
     lookAt( m_Camera->getPosition().x , m_Camera->getPosition().y, m_Camera->getPosition().z,
@@ -72,7 +72,7 @@ void RW::render()
     popMatrix();
 }
 
-void RW::keyPressEvent( QKeyEvent* event )
+void Window::keyPressEvent( QKeyEvent* event )
 {
     switch (event->key())
     {
@@ -155,7 +155,7 @@ void RW::keyPressEvent( QKeyEvent* event )
     }
 }
 
-void RW::wheelEvent(QWheelEvent * event)
+void Window::wheelEvent(QWheelEvent * event)
 {
     if (event->delta() < 0) {
         m_Camera->translateZ(1);
@@ -164,12 +164,12 @@ void RW::wheelEvent(QWheelEvent * event)
     }
 }
 
-void RW::mousePressEvent(QMouseEvent * event){
+void Window::mousePressEvent(QMouseEvent * event){
     m_mouseTracking = !m_mouseTracking;
     this->setMouseTracking(m_mouseTracking);
 }
 
-void RW::mouseMoveEvent(QMouseEvent * event)
+void Window::mouseMoveEvent(QMouseEvent * event)
 {
     float mouseSensitivity = 10.0;
 

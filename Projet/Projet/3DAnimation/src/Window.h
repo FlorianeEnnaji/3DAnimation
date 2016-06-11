@@ -1,11 +1,11 @@
-﻿#ifndef RW_H
-#define RW_H
+﻿#ifndef WINDOW_H
+#define WINDOW_H
 
 #include "../../Common/GlWindow.h"
 #include "../../Common/Types.h"
 #include "src/Camera.h"
 
-class RW : public GlWindow
+class Window : public GlWindow
 {
     private:
         Camera* m_Camera;
@@ -18,16 +18,16 @@ class RW : public GlWindow
 
         //============================= LIFECYCLE ====================================
         /**************************************************************************
-        * Name: RW
+        * Name: Window
         * Description: default constructor
         **************************************************************************/
-        RW();
+        Window();
 
         /**************************************************************************
-        * Name: ~RW
+        * Name: ~Window
         * Description: the destructor
         **************************************************************************/
-        ~RW();
+        ~Window();
 
         //============================= OPERATIONS ===================================
         /**************************************************************************
