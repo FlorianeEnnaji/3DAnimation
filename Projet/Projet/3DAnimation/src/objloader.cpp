@@ -18,112 +18,105 @@ ObjLoader::ObjLoader()
 //============================= OPERATIONS ===================================
 
 bool ObjLoader::loadObj(const char* path, std::vector<Vec3>& tabVertices,
-                        std::vector<Vec2>& tabNormals, std::vector<Vec3>& tabTexCoords)
+                        std::vector<Vec2>& tabTexCoords, std::vector<Vec3>& tabNormals)
 {
     printf("Loading OBJ file %s...\n", path);
 
-    std::vector<unsigned int> vertex_indices, uv_indices, normal_indices;
-    std::vector<Vec3> temp_vertices;
-    std::vector<Vec2> temp_uvs;
-    std::vector<Vec3> temp_normals;
+    std::vector<unsigned int> v_indices, vt_indices, vn_indices;
+    std::vector<Vec3> tmp_v;
+    std::vector<Vec2> tmp_vt;
+    std::vector<Vec3> tmp_vn;
 
     FILE* file = fopen(path, "r");
 
     if ( file == NULL )
     {
-        //printf("%s", strerror(errno));
-        printf("Impossible d'ouvrir le fichier \n");
+        printf("Impossible to read the file \n");
         getchar();
         return false;
     }
 
     while (1)
     {
-        char line_header[128];
-        // permet de lire le premier mot de la ligne
-        int res = fscanf(file, "%s", line_header);
-        if (res == EOF)
+        char tmp_line[128];
+        int test = fscanf(file, "%s", tmp_line);
+        if (test == EOF)
         {
             //End Of File
             break;
         }
 
-        // parse des vertex en fonction de l'entete
-
-       if ( strcmp( line_header, "v" ) == 0 )
-       {
-            Vec3 vertex;
-            fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z );
-            temp_vertices.push_back(vertex);
-           // std::cout << vertex.x << std::endl;
+        if ( strcmp( tmp_line, "v" ) == 0 )
+        {
+            // Vertices
+            Vec3 v;
+            fscanf(file, "%f %f %f\n", &v.x, &v.y, &v.z );
+            tmp_v.push_back(v);
         }
-       else if ( strcmp( line_header, "vt" ) == 0 )
-       {
-            Vec2 uv;
-            fscanf(file, "%f %f\n", &uv.x, &uv.y );
-            uv.y = -uv.y;
-            temp_uvs.push_back(uv);
-
+        else if ( strcmp( tmp_line, "vt" ) == 0 )
+        {
+            // Texture coordinates
+            Vec2 vt;
+            fscanf(file, "%f %f\n", &vt.x, &vt.y );
+            vt.y = -vt.y;
+            tmp_vt.push_back(vt);
         }
-       else if ( strcmp( line_header, "vn" ) == 0 )
-       {
-            Vec3 normal;
-            fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z );
-            temp_normals.push_back(normal);
-
+        else if ( strcmp( tmp_line, "vn" ) == 0 )
+        {
+            // Normals
+            Vec3 vn;
+            fscanf(file, "%f %f %f\n", &vn.x, &vn.y, &vn.z );
+            tmp_vn.push_back(vn);
         }
-       else if ( strcmp( line_header, "f" ) == 0 )
-       {
-            std::vector< std::vector<unsigned int> > face;
-
-            std::string vertex1, vertex2, vertex3;
-            unsigned int vertex_index[3], uv_index[3], normal_index[3];
-            int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertex_index[0], &uv_index[0], &normal_index[0], &vertex_index[1], &uv_index[1], &normal_index[1], &vertex_index[2], &uv_index[2], &normal_index[2] );
+        else if ( strcmp( tmp_line, "f" ) == 0 )
+        {
+            // Faces
+            unsigned int v_id[3], vt_id[3], vn_id[3];
+            int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &v_id[0], &vt_id[0], &vn_id[0], &v_id[1], &vt_id[1], &vn_id[1], &v_id[2], &vt_id[2], &vn_id[2] );
             if (matches != 9)
             {
-                printf("L'objet ne cotient pas de texture, le parse ne peux pas etre applique.\n");
+                printf("No texture in .obj file \n");
                 return false;
             }
 
-            vertex_indices.push_back(vertex_index[0]);
-            vertex_indices.push_back(vertex_index[1]);
-            vertex_indices.push_back(vertex_index[2]);
+            v_indices.push_back(v_id[0]);
+            v_indices.push_back(v_id[1]);
+            v_indices.push_back(v_id[2]);
 
-            uv_indices.push_back(uv_index[0]);
-            uv_indices.push_back(uv_index[1]);
-            uv_indices.push_back(uv_index[2]);
+            vt_indices.push_back(vt_id[0]);
+            vt_indices.push_back(vt_id[1]);
+            vt_indices.push_back(vt_id[2]);
 
-            normal_indices.push_back(normal_index[0]);
-            normal_indices.push_back(normal_index[1]);
-            normal_indices.push_back(normal_index[2]);
+            vn_indices.push_back(vn_id[0]);
+            vn_indices.push_back(vn_id[1]);
+            vn_indices.push_back(vn_id[2]);
 
-       }
-       else
-       {
-            // Probably a comment, eat up the rest of the line
-            char stupid_buffer[1000];
-            fgets(stupid_buffer, 1000, file);
+        }
+        else
+        {
+            // Go to next line
+            char tmp_buffer[1000];
+            fgets(tmp_buffer, 1000, file);
         }
     }
 
     // For each vertex of each triangle
-    for (unsigned int i=0; i<vertex_indices.size(); i++)
+    for (unsigned int i=0; i<v_indices.size(); i++)
     {
-        //std::cout << vertexIndex.size() << std::endl;
         // Get the indices of its attributes
-        unsigned int vertex_index = vertex_indices[i];
-        unsigned int uv_index = uv_indices[i];
-        unsigned int normal_index = normal_indices[i];
+        unsigned int vertex_index = v_indices[i];
+        unsigned int uv_index = vt_indices[i];
+        unsigned int normal_index = vn_indices[i];
 
         // Get the attributes thanks to the index
-        Vec3 vertex = temp_vertices[ vertex_index-1 ];
-        Vec2 uv = temp_uvs[ uv_index-1 ];
-        Vec3 normal = temp_normals[ normal_index-1 ];
+        Vec3 vertex = tmp_v[ vertex_index-1 ];
+        Vec2 uv = tmp_vt[ uv_index-1 ];
+        Vec3 normal = tmp_vn[ normal_index-1 ];
 
         // Put the attributes in buffers
         tabVertices.push_back(vertex);
-        tabNormals.push_back(uv);
-        tabTexCoords.push_back(normal);
+        tabTexCoords.push_back(uv);
+        tabNormals.push_back(normal);
     }
 
     return true;

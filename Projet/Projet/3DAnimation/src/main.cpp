@@ -19,7 +19,7 @@
 int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
-    RW win;
+    Window win;
 	win.show();
 	return app.exec();
 }
