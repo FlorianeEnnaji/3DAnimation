@@ -1,4 +1,4 @@
-﻿#include "RW.h"
+﻿#include "Window.h"
 #include "Cat.h"
 
 #include <iostream>
@@ -157,7 +157,6 @@ void RW::keyPressEvent( QKeyEvent* event )
 
 void RW::wheelEvent(QWheelEvent * event)
 {
-    std::cout << event->delta() << std::endl;
     if (event->delta() < 0) {
         m_Camera->translateZ(1);
     } else {

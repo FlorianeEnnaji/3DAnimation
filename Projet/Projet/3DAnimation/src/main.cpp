@@ -10,7 +10,7 @@
 //*****************************************************************************
 
 
-#include "RW.h"
+#include "Window.h"
 #include "ObjLoader.h"
 
 #include <QApplication>
