@@ -1,5 +1,5 @@
-﻿#ifndef RW_H
-#define RW_H
+﻿#ifndef WINDOW_H
+#define WINDOW_H
 
 #include "../../Common/GlWindow.h"
 #include "../../Common/Types.h"
