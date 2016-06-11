@@ -22,9 +22,9 @@ HEADERS += \
     ../../Common/Object3D.h \
     src/Quaternion.h \
     src/Camera.h \
-    src/RW.h \
     src/Cat.h \
-    src/ObjLoader.h
+    src/ObjLoader.h \
+    src/Window.h
 
 SOURCES += \
     ../../Common/GlFramework.cpp \
@@ -34,9 +34,9 @@ SOURCES += \
     src/main.cpp \
     src/Camera.cpp\
     src/Quaternion.cpp\
-    src/RW.cpp \
     src/Cat.cpp \
-    src/ObjLoader.cpp
+    src/ObjLoader.cpp \
+    src/Window.cpp
 
 DISTFILES +=
 
