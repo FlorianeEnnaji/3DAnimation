@@ -11,13 +11,14 @@ Cat* g_Cat;
 
 //============================= LIFECYCLE ====================================
 
-Window::Window()
+RW::RW()
 {
     m_CurrentRotationX = 0.0;
     m_CurrentRotationY = 0.0;
     setWindowTitle(trUtf8("3DAnimation"));
     g_Cat = new Cat();
 
+    m_mouseTracking = false;
     Vec3* camera_position = new Vec3(20,10,30);
     m_MousePosition.x = 0;
     m_MousePosition.y = 5;
@@ -25,7 +26,7 @@ Window::Window()
     m_Camera = new Camera(*camera_position, *camera_orientation, 70, 40, 5, 0.7);
 }
 
-Window::~Window()
+RW::~RW()
 {
     delete g_Cat;
     delete m_Camera;
@@ -33,7 +34,7 @@ Window::~Window()
 
 //============================= OPERATIONS ===================================
 
-bool Window::initializeObjects()
+bool RW::initializeObjects()
 {
 	// Fond gris
 	glClearColor( 0.2f, 0.2f, 0.2f, 1.0f );
@@ -55,7 +56,7 @@ bool Window::initializeObjects()
 	return true;
 }
 
-void Window::render()
+void RW::render()
 {
     Quaternion orientation = m_Camera->getOrientation();
     lookAt( m_Camera->getPosition().x , m_Camera->getPosition().y, m_Camera->getPosition().z,
@@ -71,7 +72,7 @@ void Window::render()
     popMatrix();
 }
 
-void Window::keyPressEvent( QKeyEvent* event )
+void RW::keyPressEvent( QKeyEvent* event )
 {
     switch (event->key())
     {
@@ -151,11 +152,10 @@ void Window::keyPressEvent( QKeyEvent* event )
             m_Camera->setOrientation(0,5,0);
             break;
 
-
     }
 }
 
-void Window::wheelEvent(QWheelEvent * event)
+void RW::wheelEvent(QWheelEvent * event)
 {
     if (event->delta() < 0) {
         m_Camera->translateZ(1);
@@ -164,9 +164,13 @@ void Window::wheelEvent(QWheelEvent * event)
     }
 }
 
-void Window::mouseMoveEvent(QMouseEvent * event)
+void RW::mousePressEvent(QMouseEvent * event){
+    m_mouseTracking = !m_mouseTracking;
+    this->setMouseTracking(m_mouseTracking);
+}
+
+void RW::mouseMoveEvent(QMouseEvent * event)
 {
-    this->setMouseTracking(true);
     float mouseSensitivity = 10.0;
 
     // the middle of the screen in the x direction
