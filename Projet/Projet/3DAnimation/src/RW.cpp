@@ -114,6 +114,54 @@ void RW::keyPressEvent( QKeyEvent* event )
         case Qt::Key_J:
             g_Cat->jump();
             break;
+
+        case Qt::Key_0:
+            this->setMouseTracking(false);
+            m_Camera->setPosition(20,10,30);
+            m_Camera->setOrientation(0,5,0);
+            break;
+
+        case Qt::Key_1:
+            this->setMouseTracking(false);
+            m_Camera->setPosition(20,10,15);
+            m_Camera->setOrientation(0,5,0);
+            break;
+
+        case Qt::Key_2:
+            this->setMouseTracking(false);
+            m_Camera->setPosition(-20,10,30);
+            m_Camera->setOrientation(0,5,0);
+            break;
+
+        case Qt::Key_3:
+            this->setMouseTracking(false);
+            m_Camera->setPosition(-20,10,-30);
+            m_Camera->setOrientation(0,5,0);
+            break;
+
+        case Qt::Key_4:
+            this->setMouseTracking(false);
+            m_Camera->setPosition(20,10,-30);
+            m_Camera->setOrientation(0,5,0);
+            break;
+
+        case Qt::Key_5:
+            this->setMouseTracking(false);
+            m_Camera->setPosition(20,10,-15);
+            m_Camera->setOrientation(0,5,0);
+            break;
+
+
+    }
+}
+
+void RW::wheelEvent(QWheelEvent * event)
+{
+    std::cout << event->delta() << std::endl;
+    if (event->delta() < 0) {
+        m_Camera->translateZ(1);
+    } else {
+        m_Camera->translateZ(-1);
     }
 }
 

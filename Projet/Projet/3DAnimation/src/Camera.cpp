@@ -164,3 +164,11 @@ void Camera::setOrientation(float x, float y, float z)
     m_Orientation.m_Y = y;
     m_Orientation.m_Z = z;
 }
+
+void Camera::setPosition(float x, float y, float z)
+{
+    // update camera's orientation
+    m_Position.x = x;
+    m_Position.y = y;
+    m_Position.z = z;
+}
