@@ -12,6 +12,7 @@ class RW : public GlWindow
         Vec2 m_MousePosition;
         float m_CurrentRotationX;
         float m_CurrentRotationY;
+        bool m_mouseTracking;
 
 	public:
 
@@ -65,6 +66,14 @@ class RW : public GlWindow
             - QWheelEvent*: the wheel move event
         **************************************************************************/
         void wheelEvent(QWheelEvent*);
+
+        /**************************************************************************
+        * Name: mousePressEvent
+        * Description: do actions depending on the mouse button press
+        * Inputs:
+            - QMouseEvent*: the mouse button press event
+        **************************************************************************/
+        void mousePressEvent(QMouseEvent * event);
 };
 
 #endif

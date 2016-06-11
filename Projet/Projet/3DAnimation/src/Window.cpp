@@ -18,6 +18,7 @@ RW::RW()
     setWindowTitle(trUtf8("3DAnimation"));
     g_Cat = new Cat();
 
+    m_mouseTracking = false;
     Vec3* camera_position = new Vec3(20,10,30);
     m_MousePosition.x = 0;
     m_MousePosition.y = 5;
@@ -151,7 +152,6 @@ void RW::keyPressEvent( QKeyEvent* event )
             m_Camera->setOrientation(0,5,0);
             break;
 
-
     }
 }
 
@@ -164,9 +164,13 @@ void RW::wheelEvent(QWheelEvent * event)
     }
 }
 
+void RW::mousePressEvent(QMouseEvent * event){
+    m_mouseTracking = !m_mouseTracking;
+    this->setMouseTracking(m_mouseTracking);
+}
+
 void RW::mouseMoveEvent(QMouseEvent * event)
 {
-    this->setMouseTracking(true);
     float mouseSensitivity = 10.0;
 
     // the middle of the screen in the x direction
