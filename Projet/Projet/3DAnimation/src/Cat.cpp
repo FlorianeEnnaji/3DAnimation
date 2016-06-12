@@ -40,7 +40,7 @@ Cat::Cat()
 //============================= OPERATIONS ===================================
 void Cat::walk()
 {
-    if (this->m_AnimType == 1)
+    if (this->m_AnimType > 0)
     {
         this->m_AnimType = 0;
     }
@@ -54,7 +54,7 @@ void Cat::walk()
 
 void Cat::run()
 {
-    if (this->m_AnimType == 2)
+    if (this->m_AnimType > 0)
     {
         this->m_AnimType = 0;
     }
@@ -68,7 +68,7 @@ void Cat::run()
 
 void Cat::jump()
 {
-    if (this->m_AnimType == 3)
+    if (this->m_AnimType > 0)
     {
         this->m_AnimType = 0;
     }
