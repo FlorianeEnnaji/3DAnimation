@@ -89,7 +89,9 @@ Quaternion Quaternion::slerp(const Quaternion& q1, const Quaternion& q2, float t
 {
     Quaternion quat1 = q1;
     Quaternion quat2 = q2;
-    Quaternion quat_prod = quat1.operator *(quat2.conjuguate());
+    quat1.normalize();
+    quat2.normalize();
+    Quaternion quat_prod = quat1.operator *(quat2);
     float teta = acos(quat_prod.m_W);
     Quaternion quat;
 
