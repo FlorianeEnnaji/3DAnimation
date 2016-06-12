@@ -18,7 +18,7 @@ Window::Window()
     setWindowTitle(trUtf8("3DAnimation"));
     g_Cat = new Cat();
 
-    m_mouseTracking = false;
+    m_MouseTracking = false;
     Vec3* camera_position = new Vec3(20,10,30);
     m_MousePosition.x = 0;
     m_MousePosition.y = 5;
@@ -165,8 +165,8 @@ void Window::wheelEvent(QWheelEvent * event)
 }
 
 void Window::mousePressEvent(QMouseEvent * event){
-    m_mouseTracking = !m_mouseTracking;
-    this->setMouseTracking(m_mouseTracking);
+    m_MouseTracking = !m_MouseTracking;
+    this->setMouseTracking(m_MouseTracking);
 }
 
 void Window::mouseMoveEvent(QMouseEvent * event)

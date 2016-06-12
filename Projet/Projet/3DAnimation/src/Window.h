@@ -12,7 +12,7 @@ class Window : public GlWindow
         Vec2 m_MousePosition;
         float m_CurrentRotationX;
         float m_CurrentRotationY;
-        bool m_mouseTracking;
+        bool m_MouseTracking;
 
 	public:
 
